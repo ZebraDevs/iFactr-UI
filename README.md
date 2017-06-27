@@ -31,7 +31,7 @@ iFactr uses a **Model-View-Controller** design pattern and navigation modeled af
 StackOverflow is monitored. Post questions using the #iFactr tag.
 
 
-iFactr is open source with a [public repository][Zebra] on GitHub.
+iFactr is open source, available on Zebra Technology's [public repository][Zebra] on GitHub.
 
 ### Installation
 
