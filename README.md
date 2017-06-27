@@ -31,8 +31,6 @@ iFactr uses a **Model-View-Controller** design pattern and navigation modeled af
 StackOverflow is monitored. Post questions using the #iFactr tag.
 
 
-iFactr is open source with a [public repository][iFactr] on GitHub.
-
 ### Installation
 
 Add References iFactr DLLs.
@@ -65,7 +63,7 @@ MIT
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
 
-   [iFactr]: <https://github.com/zebra/iFactr>
+   [iFactr]: <https://github.com/zebra/iFactr-UI>
    [MSBuild]: <https://github.com/loresoft/msbuildtasks/releases>
    [Monocross]: <https://github.com/MonoCross/MonoCross>
    
