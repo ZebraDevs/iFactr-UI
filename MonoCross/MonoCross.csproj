@@ -31,6 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE</DefineConstants>
     <DocumentationFile>bin\Release\MonoCross.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
@@ -55,6 +56,7 @@
     <Compile Include="Utilities\Extensions\EnumExtensions.cs" />
     <Compile Include="Utilities\Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Utilities\Extensions\StringExtensions.cs" />
+    <Compile Include="Utilities\HttpUtility.cs" />
     <Compile Include="Utilities\ImageComposition\ICompositor.cs" />
     <Compile Include="Utilities\ImageComposition\ImageUtility.cs" />
     <Compile Include="Utilities\ImageComposition\NullCompositor.cs" />
@@ -115,7 +117,6 @@
     <Compile Include="Utilities\TypeSwitch.cs" />
     <Compile Include="Utilities\WeakKeyDictionary.cs" />
     <Compile Include="Utilities\Xml.cs" />
-    <Compile Include="Utilities\HttpUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

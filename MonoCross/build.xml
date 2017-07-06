@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Run">
     <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
-    <PropertyGroup>
+    <PropertyGroup Condition="$(Framework) == ''">
         <Framework>.</Framework>
     </PropertyGroup>
 
@@ -24,15 +24,21 @@
     </Target>
 
     <Target Name="PreBuild" DependsOnTargets="Clean" >
-        <Exec Condition=" '$(BuildRev)'=='' " WorkingDirectory="$(Framework)" Command="git rev-list --count HEAD" ConsoleToMSBuild="true">
-            <Output TaskParameter="ConsoleOutput" PropertyName="BuildRev" />
-        </Exec>
-        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD" ConsoleToMSBuild="true">
-            <Output TaskParameter="ConsoleOutput" PropertyName="Branch" />
-        </Exec>
-        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD" ConsoleToMSBuild="true">
-            <Output TaskParameter="ConsoleOutput" PropertyName="CommitHash" />
-        </Exec>
+        <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(Framework)" Command="git rev-list --count HEAD > buildrev.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD > branch.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD > commithash.txt" />
+        <ReadLinesFromFile Condition=" '$(BuildRev)'==''" File="$(Framework)/buildrev.txt">
+            <Output TaskParameter="Lines" PropertyName="BuildRev" />
+        </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/branch.txt">
+            <Output TaskParameter="Lines" PropertyName="Branch" />
+        </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/commithash.txt">
+            <Output TaskParameter="Lines" PropertyName="CommitHash" />
+        </ReadLinesFromFile>
+        <Delete Files="$(Framework)/buildrev.txt" />
+        <Delete Files="$(Framework)/branch.txt" />
+        <Delete Files="$(Framework)/commithash.txt" />
         <Message Text="Repository Revision Num: $(BuildRev)" />
         <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
                 Regex="(\d+)\.(\d+)\.(\d+)\.(\d+)"
@@ -46,13 +52,13 @@
     </Target>
 
     <Target Name="Compile" DependsOnTargets="PreBuild">
-        <MSBuild Projects="$(Framework)/MonoCross.csproj" />
+        <MSBuild Projects="$(Framework)/MonoCross$(Ext).csproj" />
         <GitClient Command="checkout" Arguments="-- &quot;$(Framework)/Properties/AssemblyInfo.cs&quot;"/>
     </Target>
 
     <Target Name="CopyToRoot">
         <ItemGroup>
-            <MonoCrossSdk Include="$(Framework)/bin/$(Configuration)/MonoCross.dll" />
+            <MonoCrossSdk Include="$(Framework)/bin/$(Configuration)/MonoCross$(Ext).*" />
         </ItemGroup>
         <Copy SourceFiles="@(MonoCrossSdk)" DestinationFolder="Distribution" />
     </Target>
