@@ -9,6 +9,7 @@
         <!--<CallTarget Targets="GetLatest" />-->
         <CallTarget Targets="Compile" />
         <CallTarget Targets="CopyToRoot" />
+        <CallTarget Targets="Verify" />
     </Target>
 
     <Target Name="GetLatest">
@@ -52,8 +53,20 @@
 
     <Target Name="CopyToRoot">
         <ItemGroup>
-            <iFactrLib Include="$(Framework)/bin/$(Configuration)/iFactr.UI$(Ext).dll" />
+            <iFactrLib Include="$(Framework)/bin/$(Configuration)/iFactr.UI$(Ext).*" />
         </ItemGroup>
         <Copy SourceFiles="@(iFactrLib)" DestinationFolder="Distribution" />
+    </Target>
+
+    <Target Name="Verify" DependsOnTargets="CopyToRoot" Condition="$(DefineConstants.Contains('PARTIAL_SIGN'))">
+        <ItemGroup>
+            <iFactrVerify Include="Distribution/iFactr.UI$(Ext).dll" />
+        </ItemGroup>
+        <Exec Command='"$(SDK40ToolsPath)sn" -q -v @(iFactrVerify) > $(Framework)/verify.txt' ContinueOnError="true" />
+        <ReadLinesFromFile File="$(Framework)/verify.txt">
+            <Output TaskParameter="Lines" PropertyName="Verify" />
+        </ReadLinesFromFile>
+        <Delete Files="$(Framework)/verify.txt" />
+        <Error Text="$(Verify)" Condition="'$(Verify)' != ''" />
     </Target>
 </Project>
