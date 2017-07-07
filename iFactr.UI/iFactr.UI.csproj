@@ -29,7 +29,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DefineConstants>TRACE;PCL;PARTIAL_SIGN</DefineConstants>
+    <DefineConstants>TRACE;PCL</DefineConstants>
     <DocumentationFile>bin\Release\iFactr.UI.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
