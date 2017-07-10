@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Run">
+    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+    <PropertyGroup Condition="$(Framework) == ''">
+        <Framework>.</Framework>
+    </PropertyGroup>
+
+    <Target Name="Run">
+        <!-- <CallTarget Targets="GetLatest" /> -->
+        <CallTarget Targets="Compile" />
+        <CallTarget Targets="CopyToRoot" />
+        <CallTarget Targets="Verify" />
+    </Target>
+
+    <Target Name="GetLatest">
+        <GitClient Command="pull" />
+    </Target>
+
+    <Target Name="Clean">
+        <ItemGroup>
+            <MonoCrossClean Include="$(Framework)/bin/**" />
+            <MonoCrossClean Include="$(Framework)/obj/**" />
+        </ItemGroup>
+        <Delete Files="@(MonoCrossClean)" />
+    </Target>
+
+    <Target Name="PreBuild" DependsOnTargets="Clean" >
+        <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(Framework)" Command="git rev-list --count HEAD > buildrev.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD > branch.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD > commithash.txt" />
+        <ReadLinesFromFile Condition=" '$(BuildRev)'==''" File="$(Framework)/buildrev.txt">
+            <Output TaskParameter="Lines" PropertyName="BuildRev" />
+        </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/branch.txt">
+            <Output TaskParameter="Lines" PropertyName="Branch" />
+        </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/commithash.txt">
+            <Output TaskParameter="Lines" PropertyName="CommitHash" />
+        </ReadLinesFromFile>
+        <Delete Files="$(Framework)/buildrev.txt" />
+        <Delete Files="$(Framework)/branch.txt" />
+        <Delete Files="$(Framework)/commithash.txt" />
+        <Message Text="Repository Revision Num: $(BuildRev)" />
+        <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
+                Regex="(\d+)\.(\d+)\.(\d+)\.(\d+)"
+                ReplacementText="$1.$2.$3.$(BuildRev)" />
+        <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
+                Regex="(AssemblyCopyright\(\D*)\s\d{4}\s(.*\))"
+                ReplacementText="$1 $([System.DateTime]::Now.ToString(`yyyy`)) $2" />
+        <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
+                Regex="(AssemblyInformationalVersion\(\D*-)\s\w*\s(\D*:)\D*(\)&quot;)"
+                ReplacementText="$1 $(Branch) $2 $(CommitHash)$3" />
+    </Target>
+
+    <Target Name="Compile" DependsOnTargets="PreBuild">
+        <MSBuild Projects="$(Framework)/MonoCross$(Ext).csproj" />
+        <GitClient Command="checkout" Arguments="-- &quot;$(Framework)/Properties/AssemblyInfo.cs&quot;"/>
+    </Target>
+
+    <Target Name="CopyToRoot">
+        <ItemGroup>
+            <MonoCrossSdk Include="$(Framework)/bin/$(Configuration)/MonoCross$(Ext).*" />
+        </ItemGroup>
+        <Copy SourceFiles="@(MonoCrossSdk)" DestinationFolder="Distribution" />
+    </Target>
+
+    <Target Name="Verify" DependsOnTargets="CopyToRoot" Condition="$(DefineConstants.Contains('PARTIAL_SIGN'))">
+        <ItemGroup>
+            <MonoCrossVerify Include="Distribution/MonoCross$(Ext).dll" />
+        </ItemGroup>
+        <Exec Command='"$(SDK40ToolsPath)sn" -q -v @(MonoCrossVerify) > $(Framework)/verify.txt' ContinueOnError="true" />
+        <ReadLinesFromFile File="$(Framework)/verify.txt">
+            <Output TaskParameter="Lines" PropertyName="Verify" />
+        </ReadLinesFromFile>
+        <Delete Files="$(Framework)/verify.txt" />
+        <Error Text="$(Verify)" Condition="'$(Verify)' != ''" />
+    </Target>
+</Project>
