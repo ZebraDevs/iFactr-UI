@@ -58,7 +58,7 @@
         <Copy SourceFiles="@(iFactrLib)" DestinationFolder="Distribution" />
     </Target>
 
-    <Target Name="Verify" Condition="$(SignAssembly)">
+    <Target Name="Verify" Condition="$(SignAssembly) == true">
         <ItemGroup>
             <iFactrVerify Include="Distribution/iFactr.UI$(Ext).dll" />
         </ItemGroup>
