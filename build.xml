@@ -58,7 +58,7 @@
         <Copy SourceFiles="@(iFactrLib)" DestinationFolder="Distribution" />
     </Target>
 
-    <Target Name="Verify" Condition="$(DefineConstants.Contains('PARTIAL_SIGN'))">
+    <Target Name="Verify" Condition="$(SignAssembly)">
         <ItemGroup>
             <iFactrVerify Include="Distribution/iFactr.UI$(Ext).dll" />
         </ItemGroup>
