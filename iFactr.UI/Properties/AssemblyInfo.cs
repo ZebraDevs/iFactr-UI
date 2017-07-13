@@ -9,7 +9,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Zebra Technologies Corporation")]
 [assembly: AssemblyProduct("iFactr.UI")]
-[assembly: AssemblyCopyright("Copyright © 2016")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("3.6.1.42")]
+[assembly: AssemblyVersion("4.0.0.42")]
 
 #if !NETCF
 [assembly: NeutralResourcesLanguage("en-US")]
