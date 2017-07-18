@@ -10,6 +10,7 @@
         <CallTarget Targets="Compile" />
         <CallTarget Targets="CopyToRoot" />
         <CallTarget Targets="Verify" />
+        <!--<CallTarget Targets="Package" />-->
     </Target>
 
     <Target Name="GetLatest">
@@ -24,16 +25,22 @@
         <Delete Files="@(iFactrClean)" />
     </Target>
 
-    <Target Name="PreBuild" Condition="$(Ext) == ''" DependsOnTargets="Clean" >
-        <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(Framework)" Command="git rev-list --count HEAD" ConsoleToMSBuild="true">
-            <Output TaskParameter="ConsoleOutput" PropertyName="BuildRev" />
-        </Exec>
-        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD" ConsoleToMSBuild="true">
-            <Output TaskParameter="ConsoleOutput" PropertyName="Branch" />
-        </Exec>
-        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD" ConsoleToMSBuild="true">
-            <Output TaskParameter="ConsoleOutput" PropertyName="CommitHash" />
-        </Exec>
+    <Target Name="PreBuild" DependsOnTargets="Clean" >
+        <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(Framework)" Command="git rev-list --count HEAD > buildrev.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD > branch.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD > commithash.txt" />
+        <ReadLinesFromFile Condition=" '$(BuildRev)'==''" File="$(Framework)/buildrev.txt">
+            <Output TaskParameter="Lines" PropertyName="BuildRev" />
+        </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/branch.txt">
+            <Output TaskParameter="Lines" PropertyName="Branch" />
+        </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/commithash.txt">
+            <Output TaskParameter="Lines" PropertyName="CommitHash" />
+        </ReadLinesFromFile>
+        <Delete Files="$(Framework)/buildrev.txt" />
+        <Delete Files="$(Framework)/branch.txt" />
+        <Delete Files="$(Framework)/commithash.txt" />
         <Message Text="Repository Revision Num: $(BuildRev)" />
         <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
                 Regex="(\d+)\.(\d+)\.(\d+)\.(\d+)"
@@ -48,7 +55,7 @@
 
     <Target Name="Compile" DependsOnTargets="PreBuild">
         <MSBuild Projects="$(Framework)/iFactr.UI$(Ext).csproj" />
-        <GitClient Condition="$(Ext) == ''" Command="checkout" Arguments="-- &quot;$(Framework)/Properties/AssemblyInfo.cs&quot;"/>
+        <GitClient Command="checkout" Arguments="-- &quot;$(Framework)/Properties/AssemblyInfo.cs&quot;"/>
     </Target>
 
     <Target Name="CopyToRoot">
@@ -62,7 +69,7 @@
         <ItemGroup>
             <iFactrVerify Include="Distribution/iFactr.UI$(Ext).dll" />
         </ItemGroup>
-        <Exec Command='"$(SDK40ToolsPath)sn" -q -v @(iFactrVerify) > $(Framework)/verify.txt' ContinueOnError="true" />
+        <Exec Command='"$(SDK40ToolsPath)sn" -q -v %(iFactrVerify.Identity) >> $(Framework)/verify.txt' ContinueOnError="true" />
         <ReadLinesFromFile File="$(Framework)/verify.txt">
             <Output TaskParameter="Lines" PropertyName="Verify" />
         </ReadLinesFromFile>

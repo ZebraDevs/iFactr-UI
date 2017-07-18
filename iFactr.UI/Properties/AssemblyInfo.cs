@@ -5,7 +5,7 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("iFactr.UI")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("The iFactr UI API library")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Zebra Technologies Corporation")]
 [assembly: AssemblyProduct("iFactr.UI")]
@@ -22,6 +22,7 @@ using System.Resources;
 //      Revision
 //
 [assembly: AssemblyVersion("4.0.0.42")]
+[assembly: AssemblyInformationalVersion("Branch - master (Hash: Working Tree)")]
 
 #if !NETCF
 [assembly: NeutralResourcesLanguage("en-US")]
