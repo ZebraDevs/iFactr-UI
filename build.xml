@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <Target Name="Run">
-        <!--<CallTarget Targets="GetLatest" />-->
+        <!-- <CallTarget Targets="GetLatest" />-->
         <CallTarget Targets="Compile" />
         <CallTarget Targets="CopyToRoot" />
         <CallTarget Targets="Verify" />
@@ -29,6 +29,8 @@
         <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(Framework)" Command="git rev-list --count HEAD > buildrev.txt" />
         <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD > branch.txt" />
         <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD > commithash.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git log -1 --pretty=%%B > commitmessage.txt" />
+        <Exec WorkingDirectory="$(Framework)" Command="git config --get remote.origin.url > projecturl.txt" />
         <ReadLinesFromFile Condition=" '$(BuildRev)'==''" File="$(Framework)/buildrev.txt">
             <Output TaskParameter="Lines" PropertyName="BuildRev" />
         </ReadLinesFromFile>
@@ -38,9 +40,17 @@
         <ReadLinesFromFile File="$(Framework)/commithash.txt">
             <Output TaskParameter="Lines" PropertyName="CommitHash" />
         </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/commitmessage.txt">
+            <Output TaskParameter="Lines" PropertyName="CommitMessage" />
+        </ReadLinesFromFile>
+        <ReadLinesFromFile File="$(Framework)/projecturl.txt">
+            <Output TaskParameter="Lines" PropertyName="ProjectUrl" />
+        </ReadLinesFromFile>
         <Delete Files="$(Framework)/buildrev.txt" />
         <Delete Files="$(Framework)/branch.txt" />
         <Delete Files="$(Framework)/commithash.txt" />
+        <Delete Files="$(Framework)/commitmessage.txt" />
+        <Delete Files="$(Framework)/projecturl.txt" />
         <Message Text="Repository Revision Num: $(BuildRev)" />
         <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
                 Regex="(\d+)\.(\d+)\.(\d+)\.(\d+)"
@@ -51,6 +61,22 @@
         <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
                 Regex="(AssemblyInformationalVersion\(\D*-)\s\w*\s(\D*:)\D*(\)&quot;)"
                 ReplacementText="$1 $(Branch) $2 $(CommitHash)$3" />
+        <ReadLinesFromFile File="$(Framework)/Properties/AssemblyInfo.cs">
+            <Output TaskParameter="Lines" ItemName="ItemsFromFile"/>
+        </ReadLinesFromFile>
+        <PropertyGroup>
+            <Pattern>\[assembly: AssemblyVersion\(.(\d+)\.(\d+)\.(\d+)\.</Pattern>
+            <In>@(ItemsFromFile)</In>
+            <Version>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)))</Version>
+        </PropertyGroup>
+        <PropertyGroup>
+            <Pattern>\[assembly: AssemblyDescription\((["'])(?:(?=(\\?))\2.)*?\1</Pattern>
+            <Description>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)))</Description>
+        </PropertyGroup>
+        <PropertyGroup>
+            <Pattern>\[assembly: AssemblyCopyright\((["'])(?:(?=(\\?))\2.)*?\1</Pattern>
+            <Copyright>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)))</Copyright>
+        </PropertyGroup>
     </Target>
 
     <Target Name="Compile" DependsOnTargets="PreBuild">
@@ -75,5 +101,31 @@
         </ReadLinesFromFile>
         <Delete Files="$(Framework)/verify.txt" />
         <Error Text="$(Verify)" Condition="'$(Verify)' != ''" />
+    </Target>
+
+    <Target Name="Package">
+        <Exec WorkingDirectory="$(Framework)" Command="nuget spec -Force iFactr.UI" />
+        <FileUpdate Files="$(Framework)/iFactr.UI.nuspec"
+                Regex="&lt;licenseUrl&gt;.*&lt;/licenseUrl&gt;"
+                ReplacementText="&lt;licenseUrl&gt;https://mit-license.org/&lt;/licenseUrl&gt;" />
+        <FileUpdate Files="$(Framework)/iFactr.UI.nuspec"
+                Regex="&lt;authors&gt;.*&lt;/authors&gt;"
+                ReplacementText="&lt;authors&gt;Zebra Technologies&lt;/authors&gt;" />
+        <FileUpdate Files="$(Framework)/iFactr.UI.nuspec"
+                Regex="&lt;owners&gt;.*&lt;/owners&gt;"
+                ReplacementText="&lt;owners&gt;Zebra Technologies&lt;/owners&gt;" />
+        <FileUpdate Files="$(Framework)/iFactr.UI.nuspec"
+                Regex="&lt;releaseNotes&gt;.*&lt;/releaseNotes&gt;"
+                ReplacementText="&lt;releaseNotes&gt;$(CommitMessage)&lt;/releaseNotes&gt;" />
+        <FileUpdate Files="$(Framework)/iFactr.UI.nuspec"
+                Regex="&lt;description&gt;.*&lt;/description&gt;"
+                ReplacementText="&lt;description&gt;$(Description.Remove(0, 32).Trim('&quot;'))&lt;/description&gt;" />
+        <FileUpdate Files="$(Framework)/iFactr.UI.nuspec"
+                Regex="&lt;projectUrl&gt;.*&lt;/projectUrl&gt;"
+                ReplacementText="&lt;projectUrl&gt;$(ProjectUrl)&lt;/projectUrl&gt;" />
+        <FileUpdate Files="$(Framework)/iFactr.UI.nuspec"
+                Regex="&lt;copyright&gt;.*&lt;/copyright&gt;"
+                ReplacementText="&lt;copyright&gt;$(Copyright.Remove(0, 30).Trim('&quot;'))&lt;/copyright&gt;" />
+        <Exec WorkingDirectory="$(Framework)" Command="nuget pack -Symbols -Version $(Version.Remove(0, 28))$(BuildRev) iFactr.UI.nuspec -Prop Configuration=Release" />
     </Target>
 </Project>
