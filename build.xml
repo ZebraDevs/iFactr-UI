@@ -6,15 +6,14 @@
     </PropertyGroup>
 
     <Target Name="Run">
-        <!-- <CallTarget Targets="GetLatest" /> -->
         <CallTarget Targets="Compile" />
         <CallTarget Targets="CopyToRoot" />
         <CallTarget Targets="Verify" />
         <CallTarget Targets="Package" Condition="'$(Ext)' != '.CF'" />
     </Target>
 
-    <Target Name="GetLatest">
-        <GitClient Command="pull" />
+    <Target Name="SubtreeUpdate">
+        <GitClient Command="subtree" Arguments="pull --prefix=MonoCross https://github.com/MonoCross/MonoCross.git master --squash"/>
     </Target>
 
     <Target Name="Clean">
