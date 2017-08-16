@@ -10,6 +10,7 @@
         <CallTarget Targets="Compile" />
         <CallTarget Targets="CopyToRoot" />
         <CallTarget Targets="Verify" />
+        <CallTarget Targets="Package" Condition="'$(Ext)' != '.CF'" />
     </Target>
 
     <Target Name="GetLatest">
@@ -26,30 +27,32 @@
 
     <Target Name="PreBuild" DependsOnTargets="Clean" >
         <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(Framework)" Command="git rev-list --count HEAD > buildrev.txt" />
-        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD > branch.txt" />
-        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD > commithash.txt" />
         <ReadLinesFromFile Condition=" '$(BuildRev)'==''" File="$(Framework)/buildrev.txt">
             <Output TaskParameter="Lines" PropertyName="BuildRev" />
         </ReadLinesFromFile>
-        <ReadLinesFromFile File="$(Framework)/branch.txt">
-            <Output TaskParameter="Lines" PropertyName="Branch" />
-        </ReadLinesFromFile>
-        <ReadLinesFromFile File="$(Framework)/commithash.txt">
-            <Output TaskParameter="Lines" PropertyName="CommitHash" />
-        </ReadLinesFromFile>
         <Delete Files="$(Framework)/buildrev.txt" />
-        <Delete Files="$(Framework)/branch.txt" />
-        <Delete Files="$(Framework)/commithash.txt" />
-        <Message Text="Repository Revision Num: $(BuildRev)" />
         <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
                 Regex="(\d+)\.(\d+)\.(\d+)\.(\d+)"
                 ReplacementText="$1.$2.$3.$(BuildRev)" />
-        <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
-                Regex="(AssemblyCopyright\(\D*)\s\d{4}\s(.*\))"
-                ReplacementText="$1 $([System.DateTime]::Now.ToString(`yyyy`)) $2" />
+
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --abbrev-ref HEAD > branch.txt" />
+        <ReadLinesFromFile File="$(Framework)/branch.txt">
+            <Output TaskParameter="Lines" PropertyName="Branch" />
+        </ReadLinesFromFile>
+        <Delete Files="$(Framework)/branch.txt" />
+
+        <Exec WorkingDirectory="$(Framework)" Command="git rev-parse --short HEAD > commithash.txt" />
+        <ReadLinesFromFile File="$(Framework)/commithash.txt">
+            <Output TaskParameter="Lines" PropertyName="CommitHash" />
+        </ReadLinesFromFile>
+        <Delete Files="$(Framework)/commithash.txt" />
         <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
                 Regex="(AssemblyInformationalVersion\(\D*-)\s\w*\s(\D*:)\D*(\)&quot;)"
                 ReplacementText="$1 $(Branch) $2 $(CommitHash)$3" />
+
+        <FileUpdate Files="$(Framework)/Properties/AssemblyInfo.cs"
+                Regex="(AssemblyCopyright\(\D*)\s\d{4}\s(.*\))"
+                ReplacementText="$1 $([System.DateTime]::Now.ToString(`yyyy`)) $2" />
     </Target>
 
     <Target Name="Compile" DependsOnTargets="PreBuild">
@@ -64,15 +67,88 @@
         <Copy SourceFiles="@(MonoCrossSdk)" DestinationFolder="Distribution" />
     </Target>
 
-    <Target Name="Verify" DependsOnTargets="CopyToRoot" Condition="$(DefineConstants.Contains('PARTIAL_SIGN'))">
+    <Target Name="Verify" Condition="$(SignAssembly) == true">
         <ItemGroup>
             <MonoCrossVerify Include="Distribution/MonoCross$(Ext).dll" />
         </ItemGroup>
-        <Exec Command='"$(SDK40ToolsPath)sn" -q -v @(MonoCrossVerify) > $(Framework)/verify.txt' ContinueOnError="true" />
+        <Exec Command='"$(SDK40ToolsPath)sn" -q -v %(MonoCrossVerify.Identity) >> $(Framework)/verify.txt' ContinueOnError="true" />
         <ReadLinesFromFile File="$(Framework)/verify.txt">
             <Output TaskParameter="Lines" PropertyName="Verify" />
         </ReadLinesFromFile>
         <Delete Files="$(Framework)/verify.txt" />
         <Error Text="$(Verify)" Condition="'$(Verify)' != ''" />
     </Target>
+
+    <Target Name="UpdateDepVersions">
+      <XmlRead XPath="//dependency/@id" XmlFileName="$(Framework)/MonoCross$(Ext).nuspec">
+        <Output TaskParameter="Value" PropertyName="_Deps" />
+      </XmlRead>
+      <XmlRead XPath="//dependency/@version" XmlFileName="$(Framework)/MonoCross$(Ext).nuspec">
+        <Output TaskParameter="Value" ItemName="Formats" />
+      </XmlRead>
+      <ItemGroup>
+        <_DepPaths Include="$(_Deps.Split(';'))"/>
+        <DepPaths Include="Distribution/%(_DepPaths.Identity).dll"/>
+      </ItemGroup>
+
+      <GetFileVersion Files="@(DepPaths)" Formats="@(Formats)">
+        <Output TaskParameter="Value" ItemName="Dependencies" />
+      </GetFileVersion>
+      <XmlUpdate XPath="//dependency[@id=&quot;%(Dependencies.Name)&quot;]/@version"
+            XmlFileName="$(Framework)/MonoCross$(Ext).nuspec"
+            Value="%(Version)"/>
+    </Target>
+
+    <Target Name="Package" DependsOnTargets="UpdateDepVersions">
+      <ReadLinesFromFile File="$(Framework)/Properties/AssemblyInfo.cs">
+        <Output TaskParameter="Lines" ItemName="ItemsFromFile"/>
+      </ReadLinesFromFile>
+      <PropertyGroup>
+        <Pattern>\[assembly: AssemblyVersion\(.(\d+)\.(\d+)\.(\d+)\.</Pattern>
+        <In>@(ItemsFromFile)</In>
+        <Version>$([System.Text.RegularExpressions.Regex]::Match($(In), $(Pattern)))</Version>
+      </PropertyGroup>
+      <Exec WorkingDirectory="$(Framework)" Command="nuget pack -Symbols -Version $(Version.Remove(0, 28))$(BuildRev) MonoCross$(Ext).csproj -Prop Configuration=Release" />
+      <GitClient Command="checkout" Arguments="-- &quot;$(Framework)/MonoCross$(Ext).nuspec&quot;"/>
+    </Target>
+
+  <UsingTask TaskName="GetFileVersion" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+        <Files ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+        <Formats ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="false" />
+        <Value ParameterType="Microsoft.Build.Framework.ITaskItem[]" Output="true" />
+    </ParameterGroup>
+    <Task>
+        <Using Namespace="System.IO"/>
+        <Using Namespace="System.Diagnostics"/>
+        <Code Type="Fragment" Language="cs">
+<![CDATA[  
+      if (Files.Length > 0)  
+      {  
+        Value = new TaskItem[Files.Length];  
+        for (int i = 0; i < Files.Length; i++)  
+        {
+          ITaskItem item = Files[i];
+          var info = new FileInfo(item.GetMetadata("FullPath"));
+          item = new TaskItem(item.ItemSpec);
+          Value[i] = item;
+          item.SetMetadata("Name", info.Name.Remove(info.Name.Length - info.Extension.Length));
+
+          var version = info.Exists ? FileVersionInfo.GetVersionInfo(info.FullName).FileVersion : null;
+          if (string.IsNullOrEmpty(version))
+          {
+              item.SetMetadata("Version", string.Empty);
+              continue;
+          }
+
+          var format = Formats != null && Formats.Length > 0 ? Formats[i].ItemSpec : null;
+          while (!string.IsNullOrEmpty(format) && format.ToCharArray().Count(c => c =='.') <  version.ToCharArray().Count(c => c =='.'))
+              version = version.Remove(version.LastIndexOf('.'));
+          item.SetMetadata("Version", version);
+        }
+      }
+]]>
+        </Code>
+    </Task>
+  </UsingTask>
 </Project>
