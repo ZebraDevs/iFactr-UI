@@ -80,11 +80,17 @@
         <Output TaskParameter="Value" PropertyName="_Deps" />
       </XmlRead>
       <XmlRead XPath="//dependency/@version" XmlFileName="$(Framework)/iFactr.UI$(Ext).nuspec">
-        <Output TaskParameter="Value" ItemName="Formats" />
+        <Output TaskParameter="Value" PropertyName="_Formats" />
       </XmlRead>
       <ItemGroup>
-        <_DepPaths Include="$(_Deps.Split(';'))"/>
-        <DepPaths Include="Distribution/%(_DepPaths.Identity).dll"/>
+        <__DepPaths Include="$(_Deps.Split(';'))"/>
+      </ItemGroup>
+      <XmlRead XPath="//*[name()='Reference'][@Include='%(__DepPaths.Identity)']/*[name()='HintPath']" XmlFileName="$(Framework)/iFactr.UI$(Ext).csproj">
+        <Output TaskParameter="Value" ItemName="_DepPaths" />
+      </XmlRead>
+      <ItemGroup>
+        <DepPaths Include="$(Framework)/%(_DepPaths.Identity)"/>
+        <Formats Include="$(_Formats.Split(';'))"/>
       </ItemGroup>
 
       <GetFileVersion Files="@(DepPaths)" Formats="@(Formats)">
