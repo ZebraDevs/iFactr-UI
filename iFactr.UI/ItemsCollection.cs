@@ -252,7 +252,7 @@ namespace iFactr.UI
             }
         }
 
-#if !PCL
+#if NETCF
         /// <summary>
         /// Returns a read-only wrapper to this collection.
         /// </summary>

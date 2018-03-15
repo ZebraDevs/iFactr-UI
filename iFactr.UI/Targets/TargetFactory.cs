@@ -9,7 +9,6 @@ using iFactr.UI.Reflection;
 using MonoCross;
 using MonoCross.Navigation;
 using MonoCross.Utilities;
-using MonoCross.Utilities.Compatibility;
 using MonoCross.Utilities.Encryption;
 using MonoCross.Utilities.ImageComposition;
 using MonoCross.Utilities.Logging;
@@ -736,7 +735,7 @@ namespace iFactr.Core.Targets
             set
             {
                 var instance = ((TargetFactory)TargetFactory.Instance);
-                instance.SessionDataRoot = Path.Combine(instance.DataPath, "session");
+                instance.SessionDataRoot = instance.DataPath.AppendPath("session");
                 if (!instance.File.Exists(instance.SessionDataPath))
                 {
                     instance.File.CreateDirectory(instance.SessionDataPath);
