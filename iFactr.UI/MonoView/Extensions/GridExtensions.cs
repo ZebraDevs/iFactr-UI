@@ -162,52 +162,39 @@ namespace iFactr.UI
                     var controlIndex = actualIndices[control];
                     var autoControl = controlIndex.RowIndex == Element.AutoLayoutIndex || controlIndex.ColumnIndex == Element.AutoLayoutIndex;
 
-                    while (controlIndex.RowIndex == Element.AutoLayoutIndex)
+                    if (controlIndex.RowIndex == Element.AutoLayoutIndex)
                     {
-                        // if we have a column index, honor it
+                        // If we have a column index, honor it
                         if (controlIndex.ColumnIndex >= 0)
                         {
                             controlIndex.RowIndex = columnHeights.Skip(controlIndex.ColumnIndex).Take(control.ColumnSpan).Max();
                             var obstructors = GetGridControls(actualIndices, controlIndex.RowIndex, controlIndex.ColumnIndex, control).ToList();
                             while (obstructors.Any())
                             {
-                                //Try the next available row
+                                // Try the next available row
                                 controlIndex.RowIndex = obstructors.Max(p => p.Value.RowIndex + p.Key.RowSpan);
                                 obstructors = GetGridControls(actualIndices, controlIndex.RowIndex, controlIndex.ColumnIndex, control).ToList();
                             }
                         }
                         else
                         {
-                            int column;
-                            var candidates = columnHeights.Where(r => r < rows.Count).ToList();
-                            int row = candidates.Any() ? candidates.Min() : rows.Count;
-
-                            if (row < rows.Count && (column = GetColumnForRow(row, columns.Count, control, actualIndices)) > -1)
-                            {
-                                controlIndex.ColumnIndex = column;
-                                controlIndex.RowIndex = row;
-                                break;
-                            }
-
-                            // TODO: re-evaluate
-                            if (!columnHeights.Any(r => r > row && r < rows.Count))
-                            {
-                                rows.Add(Row.AutoSized);
-                            }
-                        }
-
-                        while (controlIndex.RowIndex + control.RowSpan > rows.Count)
-                        {
-                            rows.Add(Row.AutoSized);
+                            // Set a minimum row and drop to auto-column logic
+                            controlIndex.RowIndex = columnHeights.Min();
                         }
                     }
 
+                    // Place in specified row or one with an available span of columns
                     while (controlIndex.ColumnIndex == Element.AutoLayoutIndex)
                     {
                         controlIndex.ColumnIndex = GetColumnForRow(controlIndex.RowIndex, columns.Count, control, actualIndices);
-                        if (controlIndex.ColumnIndex != Element.AutoLayoutIndex) continue;
+                        if (controlIndex.ColumnIndex > Element.AutoLayoutIndex) break;
+                        var candidates = columnHeights.Where(r => r > controlIndex.RowIndex).ToList();
+                        controlIndex.RowIndex = candidates.Any() ? candidates.Min() : rows.Count;
+                    }
+
+                    while (control.RowSpan + controlIndex.RowIndex >= rows.Count)
+                    {
                         rows.Add(Row.AutoSized);
-                        controlIndex.RowIndex++;
                     }
 
                     actualIndices[control] = controlIndex;
