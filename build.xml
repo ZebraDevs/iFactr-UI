@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Run">
-    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
     <PropertyGroup>
         <Framework>./iFactr.UI</Framework>
     </PropertyGroup>
@@ -13,7 +12,7 @@
     </Target>
 
     <Target Name="SubtreeUpdate">
-        <GitClient Command="subtree" Arguments="pull --prefix=MonoCross https://github.com/MonoCross/MonoCross.git master --squash"/>
+        <Exec Command="git subtree pull --prefix=MonoCross https://github.com/MonoCross/MonoCross.git NetStandard --squash"/>
     </Target>
 
     <Target Name="Clean">
