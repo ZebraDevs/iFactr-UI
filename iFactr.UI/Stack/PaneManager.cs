@@ -168,7 +168,10 @@ namespace iFactr.Core
                 var view = (root as IView) ?? MXContainer.Resolve<IView>();
                 if (view != null)
                 {
-                    view.HeaderColor = iApp.Instance.Style.HeaderColor;
+                    if (iApp.Instance != null)
+                    {
+                        view.HeaderColor = iApp.Instance.Style.HeaderColor;
+                    }
                     view.SetBackground(iApp.VanityImagePath, ContentStretch.None);
                     if (root == null)
                     {

@@ -7,7 +7,6 @@ using MonoCross.Navigation;
 using MonoCross.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -20,7 +19,7 @@ namespace iFactr.UI
     public class Converter
     {
 #if !NETCF
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 #endif
         private readonly IEnumerable<MethodInfo> _cellConversionMethods;
 
