@@ -578,6 +578,8 @@ namespace MonoCross.Utilities.Network
                 Stream postStream = request.EndGetRequestStream(asynchronousResult);
 
                 // Write to the request stream.
+                if (state.PostBytes == null)
+                    state.PostBytes = new byte[0];
                 postStream.Write(state.PostBytes, 0, state.PostBytes.Length);
                 postStream.Close();
                 postStream.Dispose();
