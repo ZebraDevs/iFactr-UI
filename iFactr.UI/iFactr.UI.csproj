@@ -3,11 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Company>Zebra Technologies Corporation</Company>
-    <Copyright>Copyright ©  2018</Copyright>
-    <AssemblyVersion>4.0.0.42</AssemblyVersion>
-    <FileVersion>4.0.0.42</FileVersion>
     <Description>The iFactr UI API library</Description>
-    <Version>4.0.0.42</Version>
     <NeutralLanguage>en</NeutralLanguage>
   </PropertyGroup>
 
@@ -35,5 +31,28 @@
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(ProjectDir)" Command="git rev-list --count HEAD" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="BuildRev" />
+    </Exec>
+    <Exec Condition=" '$(Branch)'==''" WorkingDirectory="$(ProjectDir)" Command="git rev-parse --abbrev-ref HEAD" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="Branch" />
+    </Exec>
+    <Exec Condition=" '$(CommitHash)'==''" WorkingDirectory="$(ProjectDir)" Command="git rev-parse --short HEAD" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="CommitHash" />
+    </Exec>
+
+    <PropertyGroup>
+      <AssemblyVersion>4.0.0.$(BuildRev)</AssemblyVersion>
+      <FileVersion>4.0.0.$(BuildRev)</FileVersion>
+      <Version>4.0.0.$(BuildRev)-$(Branch).$(CommitHash)</Version>
+      <Copyright>Copyright ©  $([System.DateTime]::Now.ToString(`yyyy`))</Copyright>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).xml;$(TargetDir)$(TargetName).pdb" DestinationFolder="Distribution" />
+  </Target>
   
 </Project>
