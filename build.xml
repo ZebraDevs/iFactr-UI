@@ -59,7 +59,7 @@
       <GetFileVersion Files="Distribution/iFactr.UI.dll">
         <Output TaskParameter="Value" ItemName="Assembly" />
       </GetFileVersion>
-      <Exec Condition="'$(Ext)' == ''" WorkingDirectory="$(Framework)" Command="dotnet pack --include-symbols /p:SignAssembly=$(SignAssembly);AssemblyOriginatorKeyFile=$(AssemblyOriginatorKeyFile);PackageVersion=%(Assembly.Version) -o $(Framework) -c $(Configuration) iFactr.UI.csproj" />
+      <Exec Condition="'$(Ext)' == ''" WorkingDirectory="$(Framework)" Command="dotnet pack --include-symbols /p:SignAssembly=$(SignAssembly);AssemblyOriginatorKeyFile=$(AssemblyOriginatorKeyFile);PackageVersion=%(Assembly.Version) -o . -c $(Configuration) iFactr.UI.csproj" />
       <Exec WorkingDirectory="$(Framework)" Command="git checkout -- iFactr.UI.nuspec" />
     </Target>
 
