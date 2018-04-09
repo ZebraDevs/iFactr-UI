@@ -5,6 +5,7 @@
     <Company>Zebra Technologies Corporation</Company>
     <Description>The iFactr UI API library</Description>
     <NeutralLanguage>en</NeutralLanguage>
+    <DocumentationFile>bin\$(Configuration)\netstandard2.0\iFactr.UI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -52,7 +53,7 @@
   </Target>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).xml;$(TargetDir)$(TargetName).pdb" DestinationFolder="Distribution" />
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).xml;$(TargetDir)$(TargetName).pdb" DestinationFolder="../Distribution" />
   </Target>
   
 </Project>
