@@ -11,7 +11,7 @@
     </Target>
 
     <Target Name="SubtreeUpdate">
-        <Exec Command="git subtree pull --prefix=MonoCross https://github.com/MonoCross/MonoCross.git NetStandard --squash"/>
+        <Exec Command="git subtree pull --prefix=MonoCross https://github.com/MonoCross/MonoCross.git master --squash"/>
     </Target>
 
     <Target Name="Clean">
