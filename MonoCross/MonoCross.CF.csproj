@@ -80,8 +80,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CompactDevice.cs" />
     <Compile Include="Utilities\Device.cs" />
+    <Compile Include="Utilities\EncryptionMode.cs" />
     <Compile Include="Utilities\Encryption\BaseEncryption.cs" />
     <Compile Include="Utilities\Encryption\EncryptionMode.cs" />
+    <Compile Include="Utilities\Encryption\EncryptorMap.cs" />
     <Compile Include="Utilities\Encryption\IEncryption.cs" />
     <Compile Include="Utilities\Encryption\MockEncryption.cs" />
     <Compile Include="Utilities\Events.cs" />
@@ -105,16 +107,20 @@
     <Compile Include="Utilities\Logging\ILog.cs" />
     <Compile Include="Utilities\Logging\LogEvent.cs" />
     <Compile Include="Utilities\Logging\LogEventArgs.cs" />
+    <Compile Include="Utilities\Logging\LoggerFactory.cs" />
     <Compile Include="Utilities\Logging\LogHelper.cs" />
     <Compile Include="Utilities\Logging\LogMessageType.cs" />
     <Compile Include="Utilities\Logging\LoggingLevel.cs" />
+    <Compile Include="Utilities\Logging\NetworkStatus.cs" />
     <Compile Include="Utilities\Logging\QuietLogger.cs" />
+    <Compile Include="Utilities\Logging\RestfulQueue.cs" />
     <Compile Include="Utilities\MobilePlatform.cs" />
     <Compile Include="Utilities\Network\Fetch\FetcherAsynch.cs" />
     <Compile Include="Utilities\Network\Fetch\FetcherSynch.cs" />
     <Compile Include="Utilities\Network\Fetch\IFetcher.cs" />
     <Compile Include="Utilities\Network\INetwork.cs" />
     <Compile Include="Utilities\Network\NetworkAsynch.cs" />
+    <Compile Include="Utilities\Network\NetworkFactory.cs" />
     <Compile Include="Utilities\Network\NetworkGetMethod.cs" />
     <Compile Include="Utilities\Network\NetworkPostMethod.cs" />
     <Compile Include="Utilities\Network\NetworkResponse.cs" />
@@ -124,16 +130,20 @@
     <Compile Include="Utilities\Network\Post\PosterAsynch.cs" />
     <Compile Include="Utilities\Network\Post\PosterSynch.cs" />
     <Compile Include="Utilities\PlatformUtils.cs" />
-    <Compile Include="Utilities\Reflection\CompactReflector.cs" />
+    <Compile Include="Utilities\Reflection\BasicReflector.cs" />
     <Compile Include="Utilities\Reflection\IReflector.cs" />
     <Compile Include="Utilities\Reflection\NullReflector.cs" />
     <Compile Include="Utilities\Resources\BasicResources.cs" />
     <Compile Include="Utilities\Resources\IResources.cs" />
     <Compile Include="Utilities\Resources\NullResources.cs" />
     <Compile Include="Utilities\Resources\WindowsResources.cs" />
+    <Compile Include="Utilities\Scanning\BarcodeScanner.cs" />
+    <Compile Include="Utilities\Scanning\BarcodeScannerFactory.cs" />
+    <Compile Include="Utilities\Scanning\IBarcodeScanner.cs" />
     <Compile Include="Utilities\Scanning\IScanner.cs" />
     <Compile Include="Utilities\Scanning\MockScanner.cs" />
     <Compile Include="Utilities\Scanning\Scanner.cs" />
+    <Compile Include="Utilities\Scanning\Symbology.cs" />
     <Compile Include="Utilities\Serialization\BaseSerializer.cs" />
     <Compile Include="Utilities\Serialization\ISerializer.cs" />
     <Compile Include="Utilities\Serialization\SerializationFormat.cs" />
@@ -143,9 +153,7 @@
     <Compile Include="Utilities\Serialization\SerializerXml.cs" />
     <Compile Include="Utilities\Storage\BaseFile.cs" />
     <Compile Include="Utilities\Storage\BasicFile.cs" />
-    <Compile Include="Utilities\Storage\Compatibility\Directory.cs" />
-    <Compile Include="Utilities\Storage\Compatibility\File.cs" />
-    <Compile Include="Utilities\Storage\Compatibility\Path.cs" />
+    <Compile Include="Utilities\Storage\FileFactory.cs" />
     <Compile Include="Utilities\Storage\FileHelper.cs" />
     <Compile Include="Utilities\Storage\IFile.cs" />
     <Compile Include="Utilities\Storage\NullFile.cs" />
@@ -156,6 +164,7 @@
     <Compile Include="Utilities\Threading\IdleThreadQueue.cs" />
     <Compile Include="Utilities\Threading\MockThread.cs" />
     <Compile Include="Utilities\Threading\NullThread.cs" />
+    <Compile Include="Utilities\Threading\ThreadFactory.cs" />
     <Compile Include="Utilities\TypeSwitch.cs" />
     <Compile Include="Utilities\WeakKeyDictionary.cs" />
     <Compile Include="Utilities\Xml.cs" />
@@ -175,4 +184,45 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <PropertyGroup>
+    <PreBuildEvent>git rev-list --count HEAD &gt; buildrev.txt &amp;&amp; set /p BUILDREV=&lt;buildrev.txt &amp;&amp; del buildrev.txt
+git rev-parse --abbrev-ref HEAD &gt; branch.txt &amp;&amp; set /p BRANCH=&lt;branch.txt &amp;&amp; del branch.txt
+git rev-parse --short HEAD &gt; commithash.txt &amp;&amp; set /p COMMITHASH=&lt;commithash.txt &amp;&amp; del commithash.txt
+
+setlocal EnableDelayedExpansion
+set LINES=0
+for /f "usebackq delims==" %25%25I in ("$(ProjectDir)Properties\AssemblyInfo.cs") do (
+    set /a LINES=LINES+1    
+)
+set /a LINES=LINES-3
+
+call:PrintFirstNLine &gt; output.txt
+
+FOR /F "tokens=*" %%A IN ('DATE/T') DO FOR %%B IN (%%A) DO SET Today=%%B
+FOR /F "tokens=1-3 delims=/-" %%A IN ("%Today%") DO (
+	SET DayMonth=%%A
+	SET MonthDay=%%B
+	SET Year=%%C
+)
+
+echo "%Year%")]&gt;&gt; output.txt
+echo [assembly: AssemblyVersion("4.0.0.%BUILDREV%")]&gt;&gt; output.txt
+echo [assembly: AssemblyInformationalVersion("4.0.0.%BUILDREV%-%BRANCH%.%COMMITHASH%")]&gt;&gt; output.txt
+move output.txt "$(ProjectDir)Properties\AssemblyInfo.cs"
+
+goto EOF
+
+:PrintFirstNLine
+set cur=0
+for /f "usebackq delims==" %25%25I in ("$(ProjectDir)Properties\AssemblyInfo.cs") do (
+    echo %25%25I
+    set /a cur=cur+1    
+    if "!cur!"=="%25LINES%25" goto EOF
+)
+
+:EOF 
+
+exit /b</PreBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)$(TargetName).*" "$(ProjectDir)Distribution"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

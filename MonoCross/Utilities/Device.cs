@@ -17,14 +17,15 @@ namespace MonoCross.Utilities
     /// <summary>
     /// Represents a collection of platform-specific utilities in the abstract.
     /// </summary>
-    public abstract class Device
+    public class Device
     {
         /// <summary>
         /// Initializes a static instance of the <see cref="Device"/> class.
         /// </summary>
         static Device()
         {
-            DirectorySeparatorChar = '/';
+            DirectorySeparatorChar = System.IO.Path.DirectorySeparatorChar;
+            DataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         }
 
         #region Singleton initializer
@@ -39,34 +40,39 @@ namespace MonoCross.Utilities
             if (newInstance == null)
                 throw new ArgumentNullException();
 
-            MXContainer.RegisterSingleton<IImageCache>(typeof(ImageCache));
+            MXContainer.RegisterSingleton<IThread>(typeof(BasicThread));
+            MXContainer.RegisterSingleton<IThread>(typeof(MockThread), ThreadType.MockThread.ToString());
+
             MXContainer.RegisterSingleton<INetwork>(typeof(NetworkAsynch));
-            MXContainer.RegisterSingleton<ILog>(typeof(DiagnosticDebugLogger));
+            MXContainer.RegisterSingleton<INetwork>(typeof(NetworkSynch), NetworkType.NetworkSynch.ToString());
+
+            MXContainer.RegisterSingleton<IImageCache>(typeof(ImageCache));
+            MXContainer.RegisterSingleton<IFile>(typeof(BasicFile));
+            MXContainer.RegisterSingleton<Resources.IResources>(typeof(Resources.BasicResources));
+            MXContainer.RegisterSingleton<IReflector>(typeof(BasicReflector));
+            MXContainer.RegisterSingleton<ILog>(typeof(BasicLogger), args =>
+            {
+                var path = args.Length > 0 ? args[0] as string : null;
+                return new BasicLogger(path ?? SessionDataPath.AppendPath("Log"));
+            });
+
             MXContainer.RegisterSingleton<IEncryption>(typeof(MockEncryption));
-            MXContainer.RegisterSingleton<IFile>(typeof(NullFile));
-            MXContainer.RegisterSingleton<IThread>(typeof(NullThread));
-            MXContainer.RegisterSingleton<IReflector>(typeof(NullReflector));
-            MXContainer.RegisterSingleton<Resources.IResources>(typeof(Resources.NullResources));
             MXContainer.RegisterSingleton<ImageComposition.ICompositor>(typeof(ImageComposition.NullCompositor));
 
             Instance = newInstance;
             Instance.Initialize();
-            if (!File.Exists(SessionDataPath))
-            {
-                File.CreateDirectory(SessionDataPath);
-            }
+            File.EnsureDirectoryExistsForFile(SessionDataPath.AppendPath("Log"));
         }
         #endregion
 
         private string _applicationPath;
         private string _sessionDataRoot;
         private string _sessionDataAppend = string.Empty;
-        private static string _dataPath;
 
         /// <summary>
         /// Initializes this instance with platform-specific implementations.
         /// </summary>
-        public abstract void Initialize();
+        public virtual void Initialize() { }
 
         /// <summary>
         /// Gets or sets the Device instance stored on the session.
@@ -163,7 +169,7 @@ namespace MonoCross.Utilities
 
             set
             {
-                if (!string.IsNullOrEmpty(value))
+                if (!string.IsNullOrEmpty(value) && File != null)
                     File.EnsureDirectoryExists(value);
                 _sessionDataRoot = value;
             }
@@ -237,7 +243,7 @@ namespace MonoCross.Utilities
         /// <value>File system access as an <see cref="IFile"/> instance.</value>
         public static IFile File
         {
-            get { return MXContainer.Resolve<IFile>(); }
+            get { return FileFactory.Create(); }
             set { MXContainer.RegisterSingleton<IFile>(value); }
         }
 
@@ -257,7 +263,7 @@ namespace MonoCross.Utilities
         /// <value>The logger as an <see cref="ILog"/> instance.</value>
         public static ILog Log
         {
-            get { return MXContainer.Resolve<ILog>(); }
+            get { return LoggerFactory.Create(SessionDataPath.AppendPath("Log")); }
             set { MXContainer.RegisterSingleton<ILog>(value); }
         }
 
@@ -286,7 +292,7 @@ namespace MonoCross.Utilities
         /// <value>The threading utility as an <see cref="IThread"/> instance.</value>
         public static IThread Thread
         {
-            get { return MXContainer.Resolve<IThread>(); }
+            get { return ThreadFactory.Create(); }
             set { MXContainer.RegisterSingleton<IThread>(value); }
         }
 
@@ -296,7 +302,7 @@ namespace MonoCross.Utilities
         /// <value>The networking utility as an <see cref="INetwork"/> instance.</value>
         public static INetwork Network
         {
-            get { return MXContainer.Resolve<INetwork>(); }
+            get { return NetworkFactory.Create(); }
             set { MXContainer.RegisterSingleton<INetwork>(value); }
         }
 
@@ -314,11 +320,7 @@ namespace MonoCross.Utilities
         /// Gets the path for read/write global data.
         /// </summary>
         /// <value>The data path as a <see cref="string"/> instance.</value>
-        public static string DataPath
-        {
-            get { return _dataPath; }
-            set { _dataPath = value; }
-        }
+        public static string DataPath { get; set; }
 
         /// <summary>
         /// Gets the appropriate directory separator character for the platform.

@@ -270,29 +270,6 @@
             <value>The action type as an <see cref="T:iFactr.Core.Controls.ActionType"/> value.</value>
             <remarks>Because this is a CancelButton, this will always return ActionType.Cancel.</remarks>
         </member>
-        <member name="T:iFactr.Core.Controls.PanelItem">
-            <summary>
-            An item that can be added to an <see cref="T:iFactr.Core.Layers.IHtmlText"/> element.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Controls.PanelItem.GetHtml">
-            <summary>
-            Returns an HTML representation of this instance.
-            </summary>
-            <returns>A <see cref="T:System.String"/> representing this instance in HTML.</returns>
-        </member>
-        <member name="M:iFactr.Core.Controls.PanelItem.Clone">
-            <summary>
-            Creates a deep-copy clone of this instance.
-            </summary>
-            <returns>The cloned instance.</returns>
-        </member>
-        <member name="M:iFactr.Core.Controls.PanelItem.CloneOverride">
-            <summary>
-            Creates a deep-copy clone of this instance.
-            </summary>
-            <returns>The cloned instance.</returns>
-        </member>
         <member name="T:iFactr.Core.Controls.HeaderLabel">
             <summary>
             Represents a Header Label control.
@@ -560,6 +537,29 @@
             Returns an HTML representation of this instance.
             </summary>
             <returns>A <see cref="T:System.String"/> representing this instance in HTML.</returns>
+        </member>
+        <member name="T:iFactr.Core.Controls.PanelItem">
+            <summary>
+            An item that can be added to an <see cref="T:iFactr.Core.Layers.IHtmlText"/> element.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Controls.PanelItem.GetHtml">
+            <summary>
+            Returns an HTML representation of this instance.
+            </summary>
+            <returns>A <see cref="T:System.String"/> representing this instance in HTML.</returns>
+        </member>
+        <member name="M:iFactr.Core.Controls.PanelItem.Clone">
+            <summary>
+            Creates a deep-copy clone of this instance.
+            </summary>
+            <returns>The cloned instance.</returns>
+        </member>
+        <member name="M:iFactr.Core.Controls.PanelItem.CloneOverride">
+            <summary>
+            Creates a deep-copy clone of this instance.
+            </summary>
+            <returns>The cloned instance.</returns>
         </member>
         <member name="T:iFactr.Core.Controls.SubmitButton">
             <summary>
@@ -2936,6 +2936,98 @@
             Defines a custom <see cref="T:iFactr.Core.Layers.iItem"/> or <see cref="T:iFactr.Core.Forms.Field"/> class.
             </summary>
         </member>
+        <member name="T:iFactr.Core.Layers.iItem">
+            <summary>
+            Represents a navigation element within an <see cref="T:iFactr.Core.Layers.iList"/> or <see cref="T:iFactr.Core.Layers.iMenu"/>.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iItem.Text">
+            <summary>
+            Gets or sets the primary display text for this instance.
+            </summary>
+            <value>The text as a <see cref="T:System.String"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iItem.Subtext">
+            <summary>
+            Gets or sets the secondary display text for this instance.
+            </summary>
+            <value>The subtext as a <see cref="T:System.String"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iItem.Icon">
+            <summary>
+            Gets or sets an icon to display next to the text for this instance.
+            </summary>
+            <value>The icon as an <see cref="P:iFactr.Core.Layers.iItem.Icon"/>.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iItem.Link">
+            <summary>
+            Gets or sets the link to navigate to when this instance is selected.
+            </summary>
+            <value>The link as a <see cref="P:iFactr.Core.Layers.iItem.Link"/>.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iItem.Button">
+            <summary>
+            Gets or sets a secondary link, generally displayed as a button, that this instance can alternatively navigate to.
+            </summary>
+            <value>The button as a <see cref="P:iFactr.Core.Layers.iItem.Button"/>.</value>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.Clone">
+            <summary>
+            Creates a deep-copy clone of this instance.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.#ctor(iFactr.Core.Controls.Link,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link and text provided.
+            </summary>
+            <param name="link">A <see cref="P:iFactr.Core.Layers.iItem.Link"/> representing the link to navigate to when selected.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.#ctor(iFactr.Core.Controls.Link,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link, text, and async value provided.
+            </summary>
+            <param name="link">A <see cref="P:iFactr.Core.Layers.iItem.Link"/> representing the link address to navigate to when selected.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
+            <param name="async">If <c>true</c>, sets the link rev value to Async.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address and text provided.
+            </summary>
+            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address, text, and async value provided.
+            </summary>
+            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
+            <param name="async">If <c>true</c>, sets the link rev value to Async.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address, text, and subtext provided.
+            </summary>
+            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
+            <param name="subText">A <see cref="T:System.String"/> representing the subtext value.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String,System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address, text, sub text, and async value provided.
+            </summary>
+            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
+            <param name="subText">A <see cref="T:System.String"/> representing the subtext value.</param>
+            <param name="async">If <c>true</c>, sets the link rev value to Async.</param>
+        </member>
         <member name="T:iFactr.Core.Layers.MessageItem">
             <summary>
             Represents a navigation element with a fixed height and several labels ideal for displaying messages.
@@ -3293,446 +3385,6 @@
             <param name="subText">A <see cref="T:System.String"/> representing the Subtext value.</param>
             <param name="async">If <c>true</c>, sets the link rev value to Async.</param>
         </member>
-        <member name="T:iFactr.Core.Layers.iItem">
-            <summary>
-            Represents a navigation element within an <see cref="T:iFactr.Core.Layers.iList"/> or <see cref="T:iFactr.Core.Layers.iMenu"/>.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iItem.Text">
-            <summary>
-            Gets or sets the primary display text for this instance.
-            </summary>
-            <value>The text as a <see cref="T:System.String"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iItem.Subtext">
-            <summary>
-            Gets or sets the secondary display text for this instance.
-            </summary>
-            <value>The subtext as a <see cref="T:System.String"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iItem.Icon">
-            <summary>
-            Gets or sets an icon to display next to the text for this instance.
-            </summary>
-            <value>The icon as an <see cref="P:iFactr.Core.Layers.iItem.Icon"/>.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iItem.Link">
-            <summary>
-            Gets or sets the link to navigate to when this instance is selected.
-            </summary>
-            <value>The link as a <see cref="P:iFactr.Core.Layers.iItem.Link"/>.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iItem.Button">
-            <summary>
-            Gets or sets a secondary link, generally displayed as a button, that this instance can alternatively navigate to.
-            </summary>
-            <value>The button as a <see cref="P:iFactr.Core.Layers.iItem.Button"/>.</value>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.Clone">
-            <summary>
-            Creates a deep-copy clone of this instance.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.#ctor(iFactr.Core.Controls.Link,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link and text provided.
-            </summary>
-            <param name="link">A <see cref="P:iFactr.Core.Layers.iItem.Link"/> representing the link to navigate to when selected.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.#ctor(iFactr.Core.Controls.Link,System.String,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link, text, and async value provided.
-            </summary>
-            <param name="link">A <see cref="P:iFactr.Core.Layers.iItem.Link"/> representing the link address to navigate to when selected.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
-            <param name="async">If <c>true</c>, sets the link rev value to Async.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address and text provided.
-            </summary>
-            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address, text, and async value provided.
-            </summary>
-            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
-            <param name="async">If <c>true</c>, sets the link rev value to Async.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address, text, and subtext provided.
-            </summary>
-            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
-            <param name="subText">A <see cref="T:System.String"/> representing the subtext value.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iItem.#ctor(System.String,System.String,System.String,System.Boolean)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iItem"/> class using the link address, text, sub text, and async value provided.
-            </summary>
-            <param name="linkAddress">A <see cref="T:System.String"/> representing the link address to navigate to when selected.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text value.</param>
-            <param name="subText">A <see cref="T:System.String"/> representing the subtext value.</param>
-            <param name="async">If <c>true</c>, sets the link rev value to Async.</param>
-        </member>
-        <member name="T:iFactr.Core.Layers.IHtmlText">
-            <summary>
-            Defines a control that accepts HTML strings.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.IHtmlText.Text">
-            <summary>
-            Gets or sets a string of HTML.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.IHtmlText.Items">
-            <summary>
-            Gets or sets a collection of HTML-building items.
-            </summary>
-        </member>
-        <member name="T:iFactr.Core.Layers.HtmlTextExtensions">
-            <summary>
-            Represents methods for appending HTML strings to an HTML control.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.Append(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLine(iFactr.Core.Layers.IHtmlText)">
-            <summary>
-            Appends a line break.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLine(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text, followed by a line break.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBold(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text with bold formatting.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBoldLine(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text with bold formatting, followed by a line break.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendItalic(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text with italic formatting.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendItalicLine(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text with italic formatting, followed by a line break.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBoldItalic(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text with bold italic formatting.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBoldItalicLine(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends the specified text with bold italic formatting, followed by a line break.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendHorizontalRule(iFactr.Core.Layers.IHtmlText)">
-            <summary>
-            Appends a horizontal rule.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendHeading(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends a heading with the specified text.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendSubHeading(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends a sub heading with the specified text.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendSecondarySubHeading(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends a secondary sub heading with the specified text.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String)">
-            <summary>
-            Inserts an inlined image.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-            <param name="maxHeight">The maximum height of the image.</param>
-            <param name="maxWidth">The maximum width of the image.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Inserts an inlined image.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String,System.String)">
-            <summary>
-            Inserts an inlined image.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-            <param name="alignment">A <see cref="T:System.String"/> representing the image's alignment.</param>
-            <param name="maxHeight">The maximum height of the image.</param>
-            <param name="maxWidth">The maximum width of the image.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String,System.String)">
-            <summary>
-            Inserts an inlined image.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-            <param name="alignment">A <see cref="T:System.String"/> representing the image's alignment.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageLink(iFactr.Core.Layers.IHtmlText,System.String,System.String)">
-            <summary>
-            Inserts an inlined image with a link attached to it.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-            <param name="url">A <see cref="T:System.String"/> representing the URL to navigate to when the image is selected.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatLeft(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String)">
-            <summary>
-            Inserts an image floating to the left.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-            <param name="maxHeight">The maximum height of the image.</param>
-            <param name="maxWidth">The maximum width of the image.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatLeft(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Inserts an image floating to the left.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatRight(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String)">
-            <summary>
-            Inserts an image floating to the right.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-            <param name="maxHeight">The maximum height of the image.</param>
-            <param name="maxWidth">The maximum width of the image.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatRight(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Inserts an image floating to the right.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLink(iFactr.Core.Layers.IHtmlText,iFactr.UI.Link)">
-            <summary>
-            Appends an inlined link.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="link">A <see cref="T:iFactr.UI.Link"/> representing the link to append.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendEmail(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends an inlined email (mailto:) link.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="email">A <see cref="T:System.String"/> representing the email address to create the link for.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendTelephone(iFactr.Core.Layers.IHtmlText,System.String)">
-            <summary>
-            Appends an inlined telephone (tel:) link.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="telephone">A <see cref="T:System.String"/> representing the telephone number to create the link for.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLabeledTextLine(iFactr.Core.Layers.IHtmlText,System.String,System.String)">
-            <summary>
-            Appends the specified label with bold formatting and a colon, followed by the text with normal formatting, followed by a line break.
-            </summary>
-            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
-            <param name="label">A <see cref="T:System.String"/> representing the label to append with bold formatting.</param>
-            <param name="text">A <see cref="T:System.String"/> representing the text to append with normal formatting.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.VirtualPath(System.String)">
-            <summary>
-            Converts the specified path into a virtual directory path and returns the result.
-            </summary>
-            <param name="path">The path to convert to a virtual directory path.</param>
-            <returns>The virtual directory path.</returns>
-        </member>
-        <member name="T:iFactr.Core.Layers.Map">
-            <summary>
-            Represents a geographical map on an <see cref="T:iFactr.Core.Layers.iLayer"/>.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.Map.Location">
-            <summary>
-            Gets or sets the initial start location.
-            </summary>
-            <value>The location as a <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/> instance.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.Map.Annotations">
-            <summary>
-            Gets or sets the annotations of multiple points to be marked on the map.
-            </summary>
-            <value>The annotations as a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/>.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.Map.Type">
-            <summary>
-            Gets or sets the type of map.
-            </summary>
-            <value>The type of the map as a <see cref="T:iFactr.Core.Layers.Map.Types"/> value.</value>
-        </member>
-        <member name="T:iFactr.Core.Layers.Map.Types">
-            <summary>
-            The available types of map.
-            </summary>
-        </member>
-        <member name="F:iFactr.Core.Layers.Map.Types.Map">
-            <summary>
-            A map with only basic components such as roads and landmarks.
-            </summary>
-        </member>
-        <member name="F:iFactr.Core.Layers.Map.Types.Satellite">
-            <summary>
-            A map that is laid out with satellite imagery.
-            </summary>
-        </member>
-        <member name="F:iFactr.Core.Layers.Map.Types.Hybrid">
-            <summary>
-            A map with basic components overlaid on top of satellite imagery.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.Map.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map"/> class.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.Map.#ctor(System.Double,System.Double)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map"/> class.
-            </summary>
-            <param name="lat">The latitude coordinates.</param>
-            <param name="lng">The longitude coordinates.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.Map.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map"/> class.
-            </summary>
-            <param name="lat">The latitude coordinates.</param>
-            <param name="lng">The longitude coordinates.</param>
-        </member>
-        <member name="T:iFactr.Core.Layers.Map.GeoCoords">
-            <summary>
-            Represents a point with latitudinal and longitudinal coordinates.
-            </summary>
-        </member>
-        <member name="F:iFactr.Core.Layers.Map.GeoCoords.Lat">
-            <summary>
-            The latitude coordinates.
-            </summary>
-        </member>
-        <member name="F:iFactr.Core.Layers.Map.GeoCoords.Long">
-            <summary>
-            The longitude coordinates.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.Map.GeoCoords.#ctor(System.Double,System.Double)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/> struct.
-            </summary>
-            <param name="lat">The latitude coordinates.</param>
-            <param name="lng">The longitude coordinates.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.Map.GeoCoords.#ctor(System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/> struct.
-            </summary>
-            <param name="lat">The latitude coordinates.</param>
-            <param name="lng">The longitude coordinates.</param>
-        </member>
-        <member name="T:iFactr.Core.Layers.SearchList">
-            <summary>
-            Represents a list of <see cref="T:iFactr.Core.Layers.iItem"/>s on an <see cref="T:iFactr.Core.Layers.iLayer"/> that is searchable.
-            </summary>
-        </member>
-        <member name="F:iFactr.Core.Layers.SearchList.ItemsSource">
-            <summary>
-            The original Items.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.SearchList.SearchText">
-            <summary>
-            Gets or sets an optional string to prepopulate the search bar with.
-            A search will automatically be performed on this string when this instance is displayed.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.SearchList.AutoFocus">
-            <summary>
-            Gets or sets whether the search bar should automatically receive focus when displayed.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.SearchList.AutoFocusOnEmptyList">
-            <summary>
-            Gets or sets whether the search bar should automatically receive focus if the list is empty.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.SearchList.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.SearchList"/> class.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.SearchList.PerformSearch(System.String,System.String)">
-            <summary>
-            Performs a search of the contents of the list using the term provided and a navigation URI for linking.
-            </summary>
-            <param name="navigationUri">A <see cref="T:System.String"/> representing the navigation URI value.</param>
-            <param name="searchTerm">A <see cref="T:System.String"/> representing the term that is being searched.</param>
-        </member>
         <member name="T:iFactr.Core.Layers.iBlock">
             <summary>
             Represents a container for rich text or HTML information on an <see cref="T:iFactr.Core.Layers.iLayer"/>.
@@ -3955,6 +3607,225 @@
             <summary>
             Represents a base class for layer items that serve as <see cref="T:iFactr.Core.Layers.iItem" /> collections, including <see cref="T:iFactr.Core.Layers.iList"/>s and <see cref="T:iFactr.Core.Layers.iMenu"/>s. This class is abstract.
             </summary>
+        </member>
+        <member name="T:iFactr.Core.Layers.IHtmlText">
+            <summary>
+            Defines a control that accepts HTML strings.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.IHtmlText.Text">
+            <summary>
+            Gets or sets a string of HTML.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.IHtmlText.Items">
+            <summary>
+            Gets or sets a collection of HTML-building items.
+            </summary>
+        </member>
+        <member name="T:iFactr.Core.Layers.HtmlTextExtensions">
+            <summary>
+            Represents methods for appending HTML strings to an HTML control.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.Append(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLine(iFactr.Core.Layers.IHtmlText)">
+            <summary>
+            Appends a line break.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLine(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text, followed by a line break.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBold(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text with bold formatting.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBoldLine(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text with bold formatting, followed by a line break.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendItalic(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text with italic formatting.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendItalicLine(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text with italic formatting, followed by a line break.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBoldItalic(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text with bold italic formatting.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendBoldItalicLine(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends the specified text with bold italic formatting, followed by a line break.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendHorizontalRule(iFactr.Core.Layers.IHtmlText)">
+            <summary>
+            Appends a horizontal rule.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendHeading(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends a heading with the specified text.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendSubHeading(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends a sub heading with the specified text.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendSecondarySubHeading(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends a secondary sub heading with the specified text.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String)">
+            <summary>
+            Inserts an inlined image.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+            <param name="maxHeight">The maximum height of the image.</param>
+            <param name="maxWidth">The maximum width of the image.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Inserts an inlined image.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String,System.String)">
+            <summary>
+            Inserts an inlined image.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+            <param name="alignment">A <see cref="T:System.String"/> representing the image's alignment.</param>
+            <param name="maxHeight">The maximum height of the image.</param>
+            <param name="maxWidth">The maximum width of the image.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImage(iFactr.Core.Layers.IHtmlText,System.String,System.String)">
+            <summary>
+            Inserts an inlined image.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+            <param name="alignment">A <see cref="T:System.String"/> representing the image's alignment.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageLink(iFactr.Core.Layers.IHtmlText,System.String,System.String)">
+            <summary>
+            Inserts an inlined image with a link attached to it.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+            <param name="url">A <see cref="T:System.String"/> representing the URL to navigate to when the image is selected.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatLeft(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String)">
+            <summary>
+            Inserts an image floating to the left.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+            <param name="maxHeight">The maximum height of the image.</param>
+            <param name="maxWidth">The maximum width of the image.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatLeft(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Inserts an image floating to the left.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatRight(iFactr.Core.Layers.IHtmlText,System.String,System.String,System.String)">
+            <summary>
+            Inserts an image floating to the right.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+            <param name="maxHeight">The maximum height of the image.</param>
+            <param name="maxWidth">The maximum width of the image.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.InsertImageFloatRight(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Inserts an image floating to the right.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="imageSource">A <see cref="T:System.String"/> representing the image source value.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLink(iFactr.Core.Layers.IHtmlText,iFactr.UI.Link)">
+            <summary>
+            Appends an inlined link.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="link">A <see cref="T:iFactr.UI.Link"/> representing the link to append.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendEmail(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends an inlined email (mailto:) link.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="email">A <see cref="T:System.String"/> representing the email address to create the link for.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendTelephone(iFactr.Core.Layers.IHtmlText,System.String)">
+            <summary>
+            Appends an inlined telephone (tel:) link.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="telephone">A <see cref="T:System.String"/> representing the telephone number to create the link for.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.AppendLabeledTextLine(iFactr.Core.Layers.IHtmlText,System.String,System.String)">
+            <summary>
+            Appends the specified label with bold formatting and a colon, followed by the text with normal formatting, followed by a line break.
+            </summary>
+            <param name="htmlText">An <see cref="T:iFactr.Core.Layers.IHtmlText"/> representing the HTML control.</param>
+            <param name="label">A <see cref="T:System.String"/> representing the label to append with bold formatting.</param>
+            <param name="text">A <see cref="T:System.String"/> representing the text to append with normal formatting.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.HtmlTextExtensions.VirtualPath(System.String)">
+            <summary>
+            Converts the specified path into a virtual directory path and returns the result.
+            </summary>
+            <param name="path">The path to convert to a virtual directory path.</param>
+            <returns>The virtual directory path.</returns>
         </member>
         <member name="T:iFactr.Core.Layers.iLayerItem">
             <summary>
@@ -4218,6 +4089,135 @@
             Creates a deep-copy clone of this instance.
             </summary>
             <returns>The cloned instance.</returns>
+        </member>
+        <member name="T:iFactr.Core.Layers.Map">
+            <summary>
+            Represents a geographical map on an <see cref="T:iFactr.Core.Layers.iLayer"/>.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.Map.Location">
+            <summary>
+            Gets or sets the initial start location.
+            </summary>
+            <value>The location as a <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/> instance.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.Map.Annotations">
+            <summary>
+            Gets or sets the annotations of multiple points to be marked on the map.
+            </summary>
+            <value>The annotations as a <see cref="T:System.Collections.Generic.List`1"/> of <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/>.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.Map.Type">
+            <summary>
+            Gets or sets the type of map.
+            </summary>
+            <value>The type of the map as a <see cref="T:iFactr.Core.Layers.Map.Types"/> value.</value>
+        </member>
+        <member name="T:iFactr.Core.Layers.Map.Types">
+            <summary>
+            The available types of map.
+            </summary>
+        </member>
+        <member name="F:iFactr.Core.Layers.Map.Types.Map">
+            <summary>
+            A map with only basic components such as roads and landmarks.
+            </summary>
+        </member>
+        <member name="F:iFactr.Core.Layers.Map.Types.Satellite">
+            <summary>
+            A map that is laid out with satellite imagery.
+            </summary>
+        </member>
+        <member name="F:iFactr.Core.Layers.Map.Types.Hybrid">
+            <summary>
+            A map with basic components overlaid on top of satellite imagery.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.Map.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map"/> class.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.Map.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map"/> class.
+            </summary>
+            <param name="lat">The latitude coordinates.</param>
+            <param name="lng">The longitude coordinates.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.Map.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map"/> class.
+            </summary>
+            <param name="lat">The latitude coordinates.</param>
+            <param name="lng">The longitude coordinates.</param>
+        </member>
+        <member name="T:iFactr.Core.Layers.Map.GeoCoords">
+            <summary>
+            Represents a point with latitudinal and longitudinal coordinates.
+            </summary>
+        </member>
+        <member name="F:iFactr.Core.Layers.Map.GeoCoords.Lat">
+            <summary>
+            The latitude coordinates.
+            </summary>
+        </member>
+        <member name="F:iFactr.Core.Layers.Map.GeoCoords.Long">
+            <summary>
+            The longitude coordinates.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.Map.GeoCoords.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/> struct.
+            </summary>
+            <param name="lat">The latitude coordinates.</param>
+            <param name="lng">The longitude coordinates.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.Map.GeoCoords.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.Map.GeoCoords"/> struct.
+            </summary>
+            <param name="lat">The latitude coordinates.</param>
+            <param name="lng">The longitude coordinates.</param>
+        </member>
+        <member name="T:iFactr.Core.Layers.SearchList">
+            <summary>
+            Represents a list of <see cref="T:iFactr.Core.Layers.iItem"/>s on an <see cref="T:iFactr.Core.Layers.iLayer"/> that is searchable.
+            </summary>
+        </member>
+        <member name="F:iFactr.Core.Layers.SearchList.ItemsSource">
+            <summary>
+            The original Items.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.SearchList.SearchText">
+            <summary>
+            Gets or sets an optional string to prepopulate the search bar with.
+            A search will automatically be performed on this string when this instance is displayed.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.SearchList.AutoFocus">
+            <summary>
+            Gets or sets whether the search bar should automatically receive focus when displayed.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.SearchList.AutoFocusOnEmptyList">
+            <summary>
+            Gets or sets whether the search bar should automatically receive focus if the list is empty.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.SearchList.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.SearchList"/> class.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.SearchList.PerformSearch(System.String,System.String)">
+            <summary>
+            Performs a search of the contents of the list using the term provided and a navigation URI for linking.
+            </summary>
+            <param name="navigationUri">A <see cref="T:System.String"/> representing the navigation URI value.</param>
+            <param name="searchTerm">A <see cref="T:System.String"/> representing the term that is being searched.</param>
         </member>
         <member name="T:iFactr.Core.Layers.Gesture">
             <summary>
@@ -4609,6 +4609,421 @@
             <summary>
             Removes all UI elements and validation errors from the layer.
             </summary>
+        </member>
+        <member name="T:iFactr.Core.Layers.iLayer">
+            <summary>
+            Represents the base implementation for all iFactr layers.  This class is abstract.
+            <para> </para>
+            <para><img src="Diagrams\iLayer.cd"/></para>
+            </summary>
+            <remarks>
+            <para><b>Layer Types </b> </para>
+            <para>A Layer is the foundational construct for all iFactr applications. Each
+            Layer represents a self-contained piece of application functionality. There are
+            two layer types in an iFactr application. </para>
+            <para> </para>
+            <para>A <b>Layer </b>is comprised of navigation items, (lists and menus), and
+            items used for display of information, (blocks and panels). A Navigation Layer's
+            primary purpose is to provide information and workflow options within your
+            application. </para>
+            <para> </para>
+            <para>A <b>FormLayer</b> is comprised of form items, or fields, that are used to
+            capture user-provided information. Form Layers provide the basic input views for
+            an iFactr application, and are accessed through the navigation map as any other
+            layer, but a form layer has an action property that specifies the endpoint for
+            submission of form values. Form layers must provide for adequate processing,
+            (save and/or cancel), and may provide validation of fields before processing to
+            an external endpoint. Form Layers are discussed in more detail below. </para>
+            </remarks>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.ID">
+            <summary>
+            Gets a GUID for this instance when it is cloned.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.Name">
+            <summary>
+            Gets or sets the name of this instance.  Layer equality is determined by this property.
+            Layers with the same name will occupy the same place in the history stack.
+            </summary>
+            <value>The layer name as a <see cref="T:System.String"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.Title">
+            <summary>
+            Gets or sets the title for this instance.
+            </summary>
+            <value>The layer title as a <see cref="T:System.String"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.MapUri">
+            <summary>
+            Gets or sets the URI that points to this instance within the NavigationMap.
+            </summary>
+            <value>The URI as a <see cref="T:System.String"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.ActionParameters">
+            <summary>
+            Gets or sets any parameters to pass along when this instance is submitted.
+            </summary>
+            <value>The parameters to pass through.</value>
+            <remarks>Parameters in this collection are equivalent to hidden form fields.</remarks>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.ActionButtons">
+            <summary>
+            Gets or sets the action buttons for this instance.  These generally appear in the form of a popup menu, depending on the platform.
+            </summary>
+            <value>An <see cref="T:iFactr.UI.ItemsCollection`1"/> of <see cref="T:iFactr.Core.Controls.Button"/> objects.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.Items">
+            <summary>
+            Gets or sets the UI elements to render within this instance.
+            </summary>
+            <value>An <see cref="T:iFactr.UI.ItemsCollection`1"/> of <see cref="T:iFactr.Core.Layers.iLayerItem"/> objects.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.FocusedItem">
+            <summary>
+            Gets or sets the item to scroll to when the layer is presented.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.NavigationUri">
+            <summary>
+            Gets or sets the URI that was used to navigate to this instance.
+            </summary>
+            <value>The URI as a <see cref="T:System.String"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.Layout">
+            <summary>
+            Gets or sets the layout of this instance.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.IsScrollable">
+            <summary>
+            Gets or sets a value indicating whether this instance can scroll up and down.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.BackButton">
+            <summary>
+            Gets or sets a <see cref="T:iFactr.Core.Controls.Button"/> that will be used as the back button.  A value of null will use the default back button.
+            </summary>
+            <value>The back button as a <see cref="T:iFactr.Core.Controls.Button"/> instance.</value>
+            <remarks>To hide the back button, set its action type to ActionType.None.</remarks>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.ShortcutGestures">
+            <summary>
+            Gets or sets the keyboard shortcuts for this instance.
+            </summary>
+            <value>The <see cref="T:iFactr.Core.Layers.Gesture"/>-indexed collection as a <see cref="T:System.Collections.Generic.Dictionary`2"/> instance. </value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.CompositeActionButton">
+            <summary>
+            Gets or sets the action button to use when this instance is part of a composite layer set.
+            The button is only used on large form-factor targets and defines the action button for the composite layer set.
+            </summary>
+            <value>The composite action button as a <see cref="T:iFactr.Core.Controls.Button"/>.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.CompositeLayerLink">
+            <summary>
+            Gets or sets the link to the next layer for composite layer layout on large form-factor targets.
+            </summary>
+            <value>The composite layer link as a <see cref="T:iFactr.UI.Link"/>.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.CompositeLayerLayout">
+            <summary>
+            Gets or sets the layout of the composite layer on large form-factor targets.
+            </summary>
+            <value>The composite layer layout as a <see cref="P:iFactr.Core.Layers.iLayer.CompositeLayerLayout"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.CompositeParent">
+            <summary>
+            Gets or sets the root composite layer on large form-factor targets.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.NavContext">
+            <summary>
+            Gets or sets the navigation context containing information about this instance's last navigation.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.DetailLink">
+            <summary>
+            Gets or sets the detail pane link for this instance.  When set and this instance is loaded in the master pane,
+            this link will automatically be navigated to and the resultant layer will be displayed in the detail pane.
+            </summary>
+            <value>The detail pane link as a <see cref="T:iFactr.UI.Link"/>.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.LayerStyle">
+            <summary>
+            Gets or sets the style of this instance.  If this is not set, the application style will be used.
+            </summary>
+            <value>The layer style as a <see cref="T:iFactr.Core.Styles.Style"/> instance.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.PopoverPresentationStyle">
+            <summary>
+            Gets or sets the style in which the layer should be presented when rendered in a popover.
+            </summary>
+            <value>The popover mode as a <see cref="P:iFactr.Core.Layers.iLayer.PopoverPresentationStyle"/> instance.</value>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iLayer"/> class.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Load(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+             Loads this instance with the specified parameters.  This method is meant to be overridden and should be
+             where the layer's UI elements are added.
+            </summary>
+            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2"/> representing any parameters such as submitted field values.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Load(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+             Loads this instance with the specified parameters.  This method is meant to be overridden and should be
+             where the layer's UI elements are added.
+            </summary>
+            <param name="navigatedUri">A <see cref="T:System.String"/> that represents the uri used to navigate to the controller.</param>
+            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2"/> representing any parameters such as submitted field values.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Clone">
+            <summary>
+            Creates a deep-copy clone of this instance.
+            </summary>
+            <returns>The cloned instance.</returns>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.CloneOverride">
+            <summary>
+            Creates a deep-copy clone of this instance.
+            </summary>
+            <returns>The cloned instance.</returns>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> representation of this instance.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Select(iFactr.Core.Layers.iCollection{iFactr.Core.Layers.iItem},iFactr.Core.Layers.iItem)">
+            <summary>
+            Programmatically selects an <see cref="T:iFactr.Core.Layers.iItem"/>.
+            </summary>
+            <param name="collection">The collection to check for a SelectEventHandler.</param>
+            <param name="item">The <see cref="T:iFactr.Core.Layers.iItem"/> that is to be selected.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.SetFieldValues(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Sets the value of each <see cref="T:iFactr.Core.Forms.Field"/> to the corresponding value within the specified collection.
+            See remarks for more information.
+            </summary>
+            <param name="parameters">The values for some or all of the fields.</param>
+            <remarks> If a key in the dictionary matches the Legend + '.' + Field.ID, then that
+            KeyValuePair's value is converted to the appropriate type.  Format Exceptions
+            will bubble up.  This does not need to be a 1-to-1 correlation of KeyValuePairs
+            to Fields.  This method can be used to partially populate the fieldsets.</remarks>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#ModelType">
+            <summary>
+            The type of the model used by this controller.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#GetModel">
+            <summary>
+            Gets the model for the controller.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#Load(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Loads this instance with the specified parameters.
+            </summary>
+            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2" /> representing any parameters such as submitted values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#Load(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Loads this instance with the specified parameters.
+            </summary>
+            <param name="navigatedUri">A <see cref="T:System.String"/> that represents the uri used to navigate to the controller.</param>
+            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2"/> representing any parameters such as submitted values.</param>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.Parameters">
+            <summary>
+            Gets or sets the parameters added to the controller.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.View">
+            <summary>
+            Gets the <see cref="T:MonoCross.Navigation.IMXView" /> that is loaded into the controller from a <see cref="T:MonoCross.Navigation.ViewPerspective" />.
+            </summary>
+        </member>
+        <member name="T:iFactr.Core.Layers.iLayer.LayerEventHandler">
+            <summary>
+            Represents the method that will handle layer events.
+            </summary>
+        </member>
+        <member name="E:iFactr.Core.Layers.iLayer.OnLoadComplete">
+            <summary>
+            Occurs when the layer finishes loading.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.HasOnLoadCompleteDelegate">
+            <summary>
+            Gets a value indicating whether this instance has an OnLoadComplete delegate defined.
+            </summary>
+            <value><c>true</c> if this instance has an OnLoadComplete delegate defined; otherwise <c>false</c>.</value>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.LoadComplete">
+            <summary>
+            Called when this instance has finished loading.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.CancelLoad">
+            <summary>
+            Gets or sets whether to pass this instance to the bindings for rendering.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.CancelLoadAndNavigate(System.String)">
+            <summary>
+            Cancels loading of the current layer and navigates to the specified uri.
+            </summary>
+            <param name="uri">The uri of the layer to navigate to.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.CancelLoadAndNavigate(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Cancels loading of the current layer and navigates to the specified uri with the given parameters.
+            </summary>
+            <param name="uri">The uri of the layer to navigate to.</param>
+            <param name="parameters">The parameters to pass along to the next layer.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.CancelLoadAndNavigate(iFactr.Core.Controls.Link)">
+            <summary>
+            Cancels loading of the current layer and performs a navigation using the specified Link.
+            </summary>
+            <param name="link">The <see cref="T:iFactr.Core.Controls.Link"/> to navigate to.</param>
+        </member>
+        <member name="E:iFactr.Core.Layers.iLayer.iLayerRefreshRequested">
+            <summary>
+            Occurs when a refresh of the layer is requested.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.RequestRefresh">
+            <summary>
+            Requests a refresh of this instance. 
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.LayerRefreshAvailable">
+            <summary>
+            Gets whether this instance can accept refresh requests. 
+            </summary>
+        </member>
+        <member name="E:iFactr.Core.Layers.iLayer.FieldValuesRequested">
+            <summary>
+            Occurs when the layer gets its field values.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.GetFieldValues">
+            <summary>
+            Requests the current values of each <see cref="T:iFactr.Core.Forms.Field"/> on the layer.
+            This does not validate the layer.  Call Validate to validate the returned parameters.
+            This method will throw a NotImplementedException on web targets.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.IsValid">
+            <summary>
+            Gets whether each <see cref="T:iFactr.Core.Forms.Field"/> on the layer passes validation.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.ValidationErrors">
+            <summary>
+            Gets a <see cref="T:System.Collections.Generic.Dictionary`2"/> of validation errors for all fields on the layer.
+            Each field can have a list of broken validation rules.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Validate(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Validates a set of parameters based on the validation rules of each <see cref="T:iFactr.Core.Forms.Field"/> on the layer.
+            </summary>
+            <param name="parameters">The parameters to validate.</param>
+            <remarks>The parameter values are matched to <see cref="T:iFactr.Core.Forms.Field"/>s by the Key and Field.Name</remarks>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.ShouldNavigateFrom(iFactr.UI.Link,iFactr.UI.NavigationType)">
+            <summary>
+            Called when this instance is about to be removed from the history stack or placed underneath another layer.
+            </summary>
+            <returns><c>true</c> if the navigation should be allowed to proceed; otherwise <c>false</c>.</returns>
+            <param name="link">The link containing information about the navigation taking place.</param>
+            <param name='navigationType'>The type of navigation that caused the method to be called.</param>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Unload">
+            <summary>
+            Called when this instance is unloaded from memory.  On native targets, this is called when the layer is popped from the history stack.
+            On web targets,  this is called immediately after the layer is outputted.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Clear">
+            <summary>
+            Removes all UI elements and validation errors from the layer.
+            </summary>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.op_Equality(iFactr.Core.Layers.iLayer,iFactr.Core.Layers.iLayer)">
+            <summary>
+            Tests for equality between two <see cref="T:iFactr.Core.Layers.iLayer"/> instances.
+            </summary>
+            <param name="layer1">The first layer to test.</param>
+            <param name="layer2">The second layer to test.</param>
+            <returns><c>true</c> if the layers are equal; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.op_Inequality(iFactr.Core.Layers.iLayer,iFactr.Core.Layers.iLayer)">
+            <summary>
+            Tests for inequality between two <see cref="T:iFactr.Core.Layers.iLayer"/> instances.
+            </summary>
+            <param name="layer1">The first layer to test.</param>
+            <param name="layer2">The second layer to test.</param>
+            <returns><c>true</c> if the layers are not equal; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.Equals(System.Object)">
+            <summary>
+            Determines if the specified object is equal to this instance.
+            </summary>
+            <param name="obj">The object to test for equality.</param>
+            <returns><c>true</c> if the object is equal to this instance; otherwise <c>false</c>.</returns>
+        </member>
+        <member name="M:iFactr.Core.Layers.iLayer.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+        </member>
+        <member name="T:iFactr.Core.Layers.iLayer.NavigationContext">
+            <summary>
+            Represents a layer navigation context containing information of the last navigation.
+            </summary>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.NavigatedUrl">
+            <summary>
+            Gets or sets the URL that was used to navigate to the layer.
+            </summary>
+            <value>The URL as a <see cref="T:System.String"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.NavigatedActiveTab">
+            <summary>
+            Gets or sets the tab that was selected when the layer was navigated to.
+            </summary>
+            <value>The active tab as a <see cref="T:System.Int32"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.NavigatedActivePane">
+            <summary>
+            Gets or sets the pane from which the navigation to the layer was initiated.
+            </summary>
+            <value>The active pane as a <see cref="T:iFactr.UI.Pane"/> value.</value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.OutputOnPane">
+            <summary>
+            Gets or sets the pane that the layer was rendered on.
+            </summary>
+            <value>
+            The pane as a <see cref="T:iFactr.UI.Pane"/> value.
+            </value>
+        </member>
+        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.ClearPaneHistoryOnOutput">
+            <summary>
+            Gets or sets a value indicating whether to clear the large form-factor panel history when the layer is rendered.
+            </summary>
+            <value><c>true</c> if the large form-factor panel history is to be cleared; otherwise <c>false</c>.</value>
         </member>
         <member name="T:iFactr.Core.Layers.IMasterLayer">
             <summary>
@@ -5143,421 +5558,6 @@
             Initializes a new instance of the <see cref="T:iFactr.Core.Layers.CameraScanLayer"/> class.
             </summary>
             <param name="uri">The URI that is navigated to when the action button is hit.</param>
-        </member>
-        <member name="T:iFactr.Core.Layers.iLayer">
-            <summary>
-            Represents the base implementation for all iFactr layers.  This class is abstract.
-            <para> </para>
-            <para><img src="Diagrams\iLayer.cd"/></para>
-            </summary>
-            <remarks>
-            <para><b>Layer Types </b> </para>
-            <para>A Layer is the foundational construct for all iFactr applications. Each
-            Layer represents a self-contained piece of application functionality. There are
-            two layer types in an iFactr application. </para>
-            <para> </para>
-            <para>A <b>Layer </b>is comprised of navigation items, (lists and menus), and
-            items used for display of information, (blocks and panels). A Navigation Layer's
-            primary purpose is to provide information and workflow options within your
-            application. </para>
-            <para> </para>
-            <para>A <b>FormLayer</b> is comprised of form items, or fields, that are used to
-            capture user-provided information. Form Layers provide the basic input views for
-            an iFactr application, and are accessed through the navigation map as any other
-            layer, but a form layer has an action property that specifies the endpoint for
-            submission of form values. Form layers must provide for adequate processing,
-            (save and/or cancel), and may provide validation of fields before processing to
-            an external endpoint. Form Layers are discussed in more detail below. </para>
-            </remarks>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.ID">
-            <summary>
-            Gets a GUID for this instance when it is cloned.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.Name">
-            <summary>
-            Gets or sets the name of this instance.  Layer equality is determined by this property.
-            Layers with the same name will occupy the same place in the history stack.
-            </summary>
-            <value>The layer name as a <see cref="T:System.String"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.Title">
-            <summary>
-            Gets or sets the title for this instance.
-            </summary>
-            <value>The layer title as a <see cref="T:System.String"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.MapUri">
-            <summary>
-            Gets or sets the URI that points to this instance within the NavigationMap.
-            </summary>
-            <value>The URI as a <see cref="T:System.String"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.ActionParameters">
-            <summary>
-            Gets or sets any parameters to pass along when this instance is submitted.
-            </summary>
-            <value>The parameters to pass through.</value>
-            <remarks>Parameters in this collection are equivalent to hidden form fields.</remarks>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.ActionButtons">
-            <summary>
-            Gets or sets the action buttons for this instance.  These generally appear in the form of a popup menu, depending on the platform.
-            </summary>
-            <value>An <see cref="T:iFactr.UI.ItemsCollection`1"/> of <see cref="T:iFactr.Core.Controls.Button"/> objects.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.Items">
-            <summary>
-            Gets or sets the UI elements to render within this instance.
-            </summary>
-            <value>An <see cref="T:iFactr.UI.ItemsCollection`1"/> of <see cref="T:iFactr.Core.Layers.iLayerItem"/> objects.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.FocusedItem">
-            <summary>
-            Gets or sets the item to scroll to when the layer is presented.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.NavigationUri">
-            <summary>
-            Gets or sets the URI that was used to navigate to this instance.
-            </summary>
-            <value>The URI as a <see cref="T:System.String"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.Layout">
-            <summary>
-            Gets or sets the layout of this instance.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.IsScrollable">
-            <summary>
-            Gets or sets a value indicating whether this instance can scroll up and down.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.BackButton">
-            <summary>
-            Gets or sets a <see cref="T:iFactr.Core.Controls.Button"/> that will be used as the back button.  A value of null will use the default back button.
-            </summary>
-            <value>The back button as a <see cref="T:iFactr.Core.Controls.Button"/> instance.</value>
-            <remarks>To hide the back button, set its action type to ActionType.None.</remarks>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.ShortcutGestures">
-            <summary>
-            Gets or sets the keyboard shortcuts for this instance.
-            </summary>
-            <value>The <see cref="T:iFactr.Core.Layers.Gesture"/>-indexed collection as a <see cref="T:System.Collections.Generic.Dictionary`2"/> instance. </value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.CompositeActionButton">
-            <summary>
-            Gets or sets the action button to use when this instance is part of a composite layer set.
-            The button is only used on large form-factor targets and defines the action button for the composite layer set.
-            </summary>
-            <value>The composite action button as a <see cref="T:iFactr.Core.Controls.Button"/>.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.CompositeLayerLink">
-            <summary>
-            Gets or sets the link to the next layer for composite layer layout on large form-factor targets.
-            </summary>
-            <value>The composite layer link as a <see cref="T:iFactr.UI.Link"/>.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.CompositeLayerLayout">
-            <summary>
-            Gets or sets the layout of the composite layer on large form-factor targets.
-            </summary>
-            <value>The composite layer layout as a <see cref="P:iFactr.Core.Layers.iLayer.CompositeLayerLayout"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.CompositeParent">
-            <summary>
-            Gets or sets the root composite layer on large form-factor targets.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.NavContext">
-            <summary>
-            Gets or sets the navigation context containing information about this instance's last navigation.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.DetailLink">
-            <summary>
-            Gets or sets the detail pane link for this instance.  When set and this instance is loaded in the master pane,
-            this link will automatically be navigated to and the resultant layer will be displayed in the detail pane.
-            </summary>
-            <value>The detail pane link as a <see cref="T:iFactr.UI.Link"/>.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.LayerStyle">
-            <summary>
-            Gets or sets the style of this instance.  If this is not set, the application style will be used.
-            </summary>
-            <value>The layer style as a <see cref="T:iFactr.Core.Styles.Style"/> instance.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.PopoverPresentationStyle">
-            <summary>
-            Gets or sets the style in which the layer should be presented when rendered in a popover.
-            </summary>
-            <value>The popover mode as a <see cref="P:iFactr.Core.Layers.iLayer.PopoverPresentationStyle"/> instance.</value>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.Core.Layers.iLayer"/> class.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Load(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-             Loads this instance with the specified parameters.  This method is meant to be overridden and should be
-             where the layer's UI elements are added.
-            </summary>
-            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2"/> representing any parameters such as submitted field values.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Load(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-             Loads this instance with the specified parameters.  This method is meant to be overridden and should be
-             where the layer's UI elements are added.
-            </summary>
-            <param name="navigatedUri">A <see cref="T:System.String"/> that represents the uri used to navigate to the controller.</param>
-            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2"/> representing any parameters such as submitted field values.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Clone">
-            <summary>
-            Creates a deep-copy clone of this instance.
-            </summary>
-            <returns>The cloned instance.</returns>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.CloneOverride">
-            <summary>
-            Creates a deep-copy clone of this instance.
-            </summary>
-            <returns>The cloned instance.</returns>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> representation of this instance.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Select(iFactr.Core.Layers.iCollection{iFactr.Core.Layers.iItem},iFactr.Core.Layers.iItem)">
-            <summary>
-            Programmatically selects an <see cref="T:iFactr.Core.Layers.iItem"/>.
-            </summary>
-            <param name="collection">The collection to check for a SelectEventHandler.</param>
-            <param name="item">The <see cref="T:iFactr.Core.Layers.iItem"/> that is to be selected.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.SetFieldValues(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Sets the value of each <see cref="T:iFactr.Core.Forms.Field"/> to the corresponding value within the specified collection.
-            See remarks for more information.
-            </summary>
-            <param name="parameters">The values for some or all of the fields.</param>
-            <remarks> If a key in the dictionary matches the Legend + '.' + Field.ID, then that
-            KeyValuePair's value is converted to the appropriate type.  Format Exceptions
-            will bubble up.  This does not need to be a 1-to-1 correlation of KeyValuePairs
-            to Fields.  This method can be used to partially populate the fieldsets.</remarks>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#ModelType">
-            <summary>
-            The type of the model used by this controller.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#GetModel">
-            <summary>
-            Gets the model for the controller.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#Load(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Loads this instance with the specified parameters.
-            </summary>
-            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2" /> representing any parameters such as submitted values.</param>
-            <returns></returns>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.MonoCross#Navigation#IMXController#Load(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Loads this instance with the specified parameters.
-            </summary>
-            <param name="navigatedUri">A <see cref="T:System.String"/> that represents the uri used to navigate to the controller.</param>
-            <param name="parameters">A <see cref="T:System.Collections.Generic.Dictionary`2"/> representing any parameters such as submitted values.</param>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.Parameters">
-            <summary>
-            Gets or sets the parameters added to the controller.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.View">
-            <summary>
-            Gets the <see cref="T:MonoCross.Navigation.IMXView" /> that is loaded into the controller from a <see cref="T:MonoCross.Navigation.ViewPerspective" />.
-            </summary>
-        </member>
-        <member name="T:iFactr.Core.Layers.iLayer.LayerEventHandler">
-            <summary>
-            Represents the method that will handle layer events.
-            </summary>
-        </member>
-        <member name="E:iFactr.Core.Layers.iLayer.OnLoadComplete">
-            <summary>
-            Occurs when the layer finishes loading.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.HasOnLoadCompleteDelegate">
-            <summary>
-            Gets a value indicating whether this instance has an OnLoadComplete delegate defined.
-            </summary>
-            <value><c>true</c> if this instance has an OnLoadComplete delegate defined; otherwise <c>false</c>.</value>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.LoadComplete">
-            <summary>
-            Called when this instance has finished loading.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.CancelLoad">
-            <summary>
-            Gets or sets whether to pass this instance to the bindings for rendering.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.CancelLoadAndNavigate(System.String)">
-            <summary>
-            Cancels loading of the current layer and navigates to the specified uri.
-            </summary>
-            <param name="uri">The uri of the layer to navigate to.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.CancelLoadAndNavigate(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Cancels loading of the current layer and navigates to the specified uri with the given parameters.
-            </summary>
-            <param name="uri">The uri of the layer to navigate to.</param>
-            <param name="parameters">The parameters to pass along to the next layer.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.CancelLoadAndNavigate(iFactr.Core.Controls.Link)">
-            <summary>
-            Cancels loading of the current layer and performs a navigation using the specified Link.
-            </summary>
-            <param name="link">The <see cref="T:iFactr.Core.Controls.Link"/> to navigate to.</param>
-        </member>
-        <member name="E:iFactr.Core.Layers.iLayer.iLayerRefreshRequested">
-            <summary>
-            Occurs when a refresh of the layer is requested.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.RequestRefresh">
-            <summary>
-            Requests a refresh of this instance. 
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.LayerRefreshAvailable">
-            <summary>
-            Gets whether this instance can accept refresh requests. 
-            </summary>
-        </member>
-        <member name="E:iFactr.Core.Layers.iLayer.FieldValuesRequested">
-            <summary>
-            Occurs when the layer gets its field values.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.GetFieldValues">
-            <summary>
-            Requests the current values of each <see cref="T:iFactr.Core.Forms.Field"/> on the layer.
-            This does not validate the layer.  Call Validate to validate the returned parameters.
-            This method will throw a NotImplementedException on web targets.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.IsValid">
-            <summary>
-            Gets whether each <see cref="T:iFactr.Core.Forms.Field"/> on the layer passes validation.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.ValidationErrors">
-            <summary>
-            Gets a <see cref="T:System.Collections.Generic.Dictionary`2"/> of validation errors for all fields on the layer.
-            Each field can have a list of broken validation rules.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Validate(System.Collections.Generic.Dictionary{System.String,System.String})">
-            <summary>
-            Validates a set of parameters based on the validation rules of each <see cref="T:iFactr.Core.Forms.Field"/> on the layer.
-            </summary>
-            <param name="parameters">The parameters to validate.</param>
-            <remarks>The parameter values are matched to <see cref="T:iFactr.Core.Forms.Field"/>s by the Key and Field.Name</remarks>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.ShouldNavigateFrom(iFactr.UI.Link,iFactr.UI.NavigationType)">
-            <summary>
-            Called when this instance is about to be removed from the history stack or placed underneath another layer.
-            </summary>
-            <returns><c>true</c> if the navigation should be allowed to proceed; otherwise <c>false</c>.</returns>
-            <param name="link">The link containing information about the navigation taking place.</param>
-            <param name='navigationType'>The type of navigation that caused the method to be called.</param>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Unload">
-            <summary>
-            Called when this instance is unloaded from memory.  On native targets, this is called when the layer is popped from the history stack.
-            On web targets,  this is called immediately after the layer is outputted.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Clear">
-            <summary>
-            Removes all UI elements and validation errors from the layer.
-            </summary>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.op_Equality(iFactr.Core.Layers.iLayer,iFactr.Core.Layers.iLayer)">
-            <summary>
-            Tests for equality between two <see cref="T:iFactr.Core.Layers.iLayer"/> instances.
-            </summary>
-            <param name="layer1">The first layer to test.</param>
-            <param name="layer2">The second layer to test.</param>
-            <returns><c>true</c> if the layers are equal; otherwise <c>false</c>.</returns>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.op_Inequality(iFactr.Core.Layers.iLayer,iFactr.Core.Layers.iLayer)">
-            <summary>
-            Tests for inequality between two <see cref="T:iFactr.Core.Layers.iLayer"/> instances.
-            </summary>
-            <param name="layer1">The first layer to test.</param>
-            <param name="layer2">The second layer to test.</param>
-            <returns><c>true</c> if the layers are not equal; otherwise <c>false</c>.</returns>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.Equals(System.Object)">
-            <summary>
-            Determines if the specified object is equal to this instance.
-            </summary>
-            <param name="obj">The object to test for equality.</param>
-            <returns><c>true</c> if the object is equal to this instance; otherwise <c>false</c>.</returns>
-        </member>
-        <member name="M:iFactr.Core.Layers.iLayer.GetHashCode">
-            <summary>
-            Returns the hash code for this instance.
-            </summary>
-        </member>
-        <member name="T:iFactr.Core.Layers.iLayer.NavigationContext">
-            <summary>
-            Represents a layer navigation context containing information of the last navigation.
-            </summary>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.NavigatedUrl">
-            <summary>
-            Gets or sets the URL that was used to navigate to the layer.
-            </summary>
-            <value>The URL as a <see cref="T:System.String"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.NavigatedActiveTab">
-            <summary>
-            Gets or sets the tab that was selected when the layer was navigated to.
-            </summary>
-            <value>The active tab as a <see cref="T:System.Int32"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.NavigatedActivePane">
-            <summary>
-            Gets or sets the pane from which the navigation to the layer was initiated.
-            </summary>
-            <value>The active pane as a <see cref="T:iFactr.UI.Pane"/> value.</value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.OutputOnPane">
-            <summary>
-            Gets or sets the pane that the layer was rendered on.
-            </summary>
-            <value>
-            The pane as a <see cref="T:iFactr.UI.Pane"/> value.
-            </value>
-        </member>
-        <member name="P:iFactr.Core.Layers.iLayer.NavigationContext.ClearPaneHistoryOnOutput">
-            <summary>
-            Gets or sets a value indicating whether to clear the large form-factor panel history when the layer is rendered.
-            </summary>
-            <value><c>true</c> if the large form-factor panel history is to be cleared; otherwise <c>false</c>.</value>
         </member>
         <member name="T:iFactr.Core.Layers.ValidationInfo">
             <summary>
@@ -7009,6 +7009,56 @@
             </summary>
             <param name="collection">The collection containing the elements that will be copied into this collection.</param>
         </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.ConvertAll``1(System.Converter{`0,``0})">
+            <summary>
+            Converts the items in this list to a different type
+            </summary>
+            <param name="converter">A <see cref="T:System.Converter`2"/> that contains logic to convert the items.</param>
+            <typeparam name="TOutput">The type that the items are converted to</typeparam>
+            <returns>A <see cref="T:System.Collections.Generic.List`1"/> populated with converted items.</returns>
+        </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.Exists(System.Predicate{`0})">
+            <summary>
+            Determines whether the collection contains elements that match the conditions defined by the specified predicate.
+            </summary>
+            <param name="match">The predicate delegate that specifies the elements to search for.</param>
+        </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.Find(System.Predicate{`0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate and returns the first occurrence.
+            </summary>
+            <param name="match">The predicate delegate that specifies the element to search for.</param>
+        </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.FindAll(System.Predicate{`0})">
+            <summary>
+            Searches for elements that match the conditions defined by the specified predicate and returns them.
+            </summary>
+            <param name="match">The predicate delegate that specifies the elements to search for.</param>
+        </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.FindIndex(System.Predicate{`0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate and returns the index of the first occurrence.
+            </summary>
+            <param name="match">The predicate delegate that specifies the element to search for.</param>
+        </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.FindLast(System.Predicate{`0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate and returns the last occurrence.
+            </summary>
+            <param name="match">The predicate delegate that specifies the element to search for.</param>
+        </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.FindLastIndex(System.Predicate{`0})">
+            <summary>
+            Searches for an element that matches the conditions defined by the specified predicate and returns the index of the last occurrence.
+            </summary>
+            <param name="match">The predicate delegate that specifies the element to search for.</param>
+        </member>
+        <member name="M:iFactr.UI.ItemsCollection`1.TrueForAll(System.Predicate{`0})">
+            <summary>
+            Determines whether every element in the collection matches the conditions defined by the specified predicate.
+            </summary>
+            <param name="match">The predicate delegate that specifies the elements to search for.</param>
+        </member>
         <member name="M:iFactr.UI.ItemsCollection`1.Add(`0)">
             <summary>
             Adds the specified item to the end of the collection.
@@ -8213,6 +8263,43 @@
             Gets or sets the minimum amount of vertical space that the cell is allowed to consume.
             </summary>
         </member>
+        <member name="T:iFactr.UI.IGrid">
+            <summary>
+            Defines an object that acts as a grid made up of columns and rows for laying out various UI elements.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.IGrid.Columns">
+            <summary>
+            Gets a collection of the columns that currently make up the grid.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.IGrid.Children">
+            <summary>
+            Gets a collection of the UI elements that currently reside within the grid.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.IGrid.Padding">
+            <summary>
+            Gets or sets the amount of spacing between the edges of the grid and the children within it.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.IGrid.Rows">
+            <summary>
+            Gets a collection of the rows that currently make up the grid.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.IGrid.AddChild(iFactr.UI.Controls.IElement)">
+            <summary>
+            Adds the specified <see cref="T:iFactr.UI.Controls.IElement"/> instance to the grid.
+            </summary>
+            <param name="element">The element to be added to the grid.</param>
+        </member>
+        <member name="M:iFactr.UI.IGrid.RemoveChild(iFactr.UI.Controls.IElement)">
+            <summary>
+            Removes the specified <see cref="T:iFactr.UI.Controls.IElement"/> instance from the grid.
+            </summary>
+            <param name="element">The element to be removed from the grid.</param>
+        </member>
         <member name="T:iFactr.UI.IGridCell">
             <summary>
             Defines a cell that acts as a grid for laying out various UI elements.
@@ -8260,6 +8347,27 @@
         <member name="M:iFactr.UI.IGridCell.Select">
             <summary>
             Programmatically selects the cell.
+            </summary>
+        </member>
+        <member name="T:iFactr.UI.IGridTile">
+            <summary>
+            Defines a tile that acts as a grid for laying out various UI elements.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.IGridTile.NavigationLink">
+            <summary>
+            Gets or sets the link to navigate to when the tile has been selected by the user.
+            The navigation only occurs if there is no handler for the <see cref="E:iFactr.UI.IGridTile.Selected"/> event.
+            </summary>
+        </member>
+        <member name="E:iFactr.UI.IGridTile.Selected">
+            <summary>
+            Occurs when the user selects the tile.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.IGridTile.NullifyEvents">
+            <summary>
+            Resets the invocation list of all events within the class.
             </summary>
         </member>
         <member name="T:iFactr.UI.IRichContentCell">
@@ -8326,6 +8434,32 @@
         <member name="P:iFactr.UI.ISectionHeader.Text">
             <summary>
             Gets or sets the text that will be displayed on screen.
+            </summary>
+        </member>
+        <member name="T:iFactr.UI.ITile">
+            <summary>
+            Defines an entry in an <see cref="T:iFactr.UI.IListView"/> instance.  This is the base interface for
+            the <see cref="T:iFactr.UI.IGridTile"/> interface and is only supported on the Windows 8 Metro platform.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.ITile.BackgroundColor">
+            <summary>
+            Gets or sets the background color of the tile.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.ITile.MaxSize">
+            <summary>
+            Gets or sets the maximum size that the tile is allowed to be.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.ITile.MinSize">
+            <summary>
+            Gets or sets the minimum size that the tile is allowed to be.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.ITile.SelectionColor">
+            <summary>
+            Gets or sets the color with which to highlight the tile when it is selected.
             </summary>
         </member>
         <member name="T:iFactr.UI.RichContentCell">
@@ -9169,6 +9303,302 @@
             </summary>
             <param name="color">The object to be converted.</param>
             <returns>The converted object.</returns>
+        </member>
+        <member name="T:iFactr.UI.Converter">
+            <summary>
+            Provides methods for creating <see cref="T:iFactr.UI.ICell"/> instances from various <see cref="T:iFactr.Core.Layers.iItem"/>s and <see cref="T:iFactr.Core.Forms.Field"/>s.
+            These methods can be overridden in a derived class for customized behavior.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.Converter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.UI.Converter"/> class.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(System.Object,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Generates an <see cref="T:iFactr.UI.ICell"/> instance from the specified object.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style.  Can be <c>null</c>.</param>
+            <param name="view">The <see cref="T:iFactr.UI.IListView"/> instance that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use instead of creating a new one.  Can be <c>null</c>.</param>
+            <returns>The generated cell -or- <c>null</c> if no suitable conversion method can be found.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="item"/> or <paramref name="view"/> is <c>null</c>.</exception>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.iBlock,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.iBlock"/>.
+            </summary>
+            <param name="block">The block from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the block style,
+            or <c>null</c> if the block will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified block.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.iPanel,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.iPanel"/>.
+            </summary>
+            <param name="panel">The block from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the panel style,
+            or <c>null</c> if the panel will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified panel.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.iItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.iItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.ContentItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.ContentItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.MessageItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.MessageItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.MultiLineSubtextItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.MultiLineSubtextItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.RightSubtextItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.RightSubtextItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.ShopItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.ShopItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.SubtextBelowAndBesideItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.SubtextBelowAndBesideItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.SubtextItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.SubtextItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.VariableContentItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.VariableContentItem"/>.
+            </summary>
+            <param name="item">The item from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
+            or <c>null</c> if the item will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified item.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.BoolField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.BoolField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.ButtonField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.ButtonField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.DateField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.DateField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.DrawingField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.DrawingField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.EmailField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.EmailField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.LabelField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.LabelField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.MultiLineTextField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.MultiLineTextField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.NavigationField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.NavigationField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.NumericField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.NumericField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.SelectListField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.SelectListField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.SliderField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.SliderField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.TextField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.TextField"/>.
+            </summary>
+            <param name="field">The field from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
+            or <c>null</c> if the field will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified field.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToCell(System.Collections.Generic.IEnumerable{iFactr.Core.Forms.AggregateFieldset},iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
+            <summary>
+            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.AggregateFieldset"/>s.
+            </summary>
+            <param name="fieldsets">The fieldsets from which to generate the cell.</param>
+            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the fieldsets' style,
+            or <c>null</c> if the fieldsets will use the default style.</param>
+            <param name="view">The view that the cell will reside in.</param>
+            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
+            <returns>The generated cell for the specified fieldsets.</returns>
+        </member>
+        <member name="M:iFactr.UI.Converter.ConvertToControl(iFactr.Core.Forms.Field,MonoCross.Navigation.IMXView,MonoCross.Utilities.TypeSwitch,iFactr.UI.Controls.IControl)">
+            <summary>
+            Converts a Field to a Control.
+            </summary>
+            <param name="field">The <see cref="T:iFactr.Core.Forms.Field"/> to convert.</param>
+            <param name="view"></param>
+            <param name="typeSwitch">A <see cref="T:MonoCross.Utilities.TypeSwitch"/> to be used with multiple calls to this method; otherwise <c>null</c> to automatically initialize a switch.</param>
+            <param name="recycledControl">An <see cref="T:iFactr.UI.Controls.IControl"/> to recycle or initialize the returned object; otherwise <c>null</c> to automatically initializze the control.</param>
+            <returns>An <see cref="T:iFactr.UI.Controls.IControl"/> generated from the given field.</returns>
         </member>
         <member name="T:iFactr.UI.Controls.Button">
             <summary>
@@ -11080,6 +11510,81 @@
             <returns>A hash code for this instance that is suitable for use in
             hashing algorithms and data structures such as a hash table.</returns>
         </member>
+        <member name="T:iFactr.UI.Controls.IElement">
+            <summary>
+            Defines a UI element that can be sized and arranged within a view.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.ColumnIndex">
+            <summary>
+            Gets or sets the zero-based index of the column that the element should reside in.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.ColumnSpan">
+            <summary>
+            Gets or sets how many columns the element should span across.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.HorizontalAlignment">
+            <summary>
+            Gets or sets how the element should horizontally align itself in the space that is allotted for it.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.ID">
+            <summary>
+            Gets or sets an identifier that can be used to easily identify the element within its parent container.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.Margin">
+            <summary>
+            Gets or sets the amount of spacing around the element.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.Metadata">
+            <summary>
+            Gets a collection for storing arbitrary data on the object.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.Parent">
+            <summary>
+            Gets the parent object that contains this instance.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.RowIndex">
+            <summary>
+            Gets or sets the zero-based index of the row that the element should reside in.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.RowSpan">
+            <summary>
+            Gets or sets how many rows the element should span across.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.VerticalAlignment">
+            <summary>
+            Gets or sets how the element should vertically align itself in the space that is allotted for it.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.IElement.Visibility">
+            <summary>
+            Gets or sets the visible state of the element.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.Controls.IElement.Measure(iFactr.UI.Size)">
+            <summary>
+            Calculates and returns an appropriate width and height value for the element.
+            This is called by the underlying layout system and should not be used in application logic.
+            </summary>
+            <param name="constraints">The size that the element is limited to.</param>
+        </member>
+        <member name="M:iFactr.UI.Controls.IElement.SetLocation(iFactr.UI.Point,iFactr.UI.Size)">
+            <summary>
+            Sets the location and size of the element within its parent container.
+            This is called by the underlying layout system and should not be used in application logic.
+            </summary>
+            <param name="location">The X and Y coordinates of the upper left corner of the element.</param>
+            <param name="size">The width and height of the element.</param>
+        </member>
         <member name="T:iFactr.UI.Controls.IElementHost">
             <summary>
             Defines an object that acts as a container for <see cref="T:iFactr.UI.Controls.IElement"/> objects.
@@ -11157,81 +11662,6 @@
             <remarks>When creating a new instance, if <typeparamref name="T"/> is an interface type, the framework will use the
             <see cref="M:MXContainer.Resolve"/> method; otherwise, the framework will use the <see cref="M:Activator.CreateInstance"/> method.</remarks>
         </member>
-        <member name="T:iFactr.UI.Controls.IElement">
-            <summary>
-            Defines a UI element that can be sized and arranged within a view.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.ColumnIndex">
-            <summary>
-            Gets or sets the zero-based index of the column that the element should reside in.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.ColumnSpan">
-            <summary>
-            Gets or sets how many columns the element should span across.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.HorizontalAlignment">
-            <summary>
-            Gets or sets how the element should horizontally align itself in the space that is allotted for it.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.ID">
-            <summary>
-            Gets or sets an identifier that can be used to easily identify the element within its parent container.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.Margin">
-            <summary>
-            Gets or sets the amount of spacing around the element.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.Metadata">
-            <summary>
-            Gets a collection for storing arbitrary data on the object.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.Parent">
-            <summary>
-            Gets the parent object that contains this instance.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.RowIndex">
-            <summary>
-            Gets or sets the zero-based index of the row that the element should reside in.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.RowSpan">
-            <summary>
-            Gets or sets how many rows the element should span across.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.VerticalAlignment">
-            <summary>
-            Gets or sets how the element should vertically align itself in the space that is allotted for it.
-            </summary>
-        </member>
-        <member name="P:iFactr.UI.Controls.IElement.Visibility">
-            <summary>
-            Gets or sets the visible state of the element.
-            </summary>
-        </member>
-        <member name="M:iFactr.UI.Controls.IElement.Measure(iFactr.UI.Size)">
-            <summary>
-            Calculates and returns an appropriate width and height value for the element.
-            This is called by the underlying layout system and should not be used in application logic.
-            </summary>
-            <param name="constraints">The size that the element is limited to.</param>
-        </member>
-        <member name="M:iFactr.UI.Controls.IElement.SetLocation(iFactr.UI.Point,iFactr.UI.Size)">
-            <summary>
-            Sets the location and size of the element within its parent container.
-            This is called by the underlying layout system and should not be used in application logic.
-            </summary>
-            <param name="location">The X and Y coordinates of the upper left corner of the element.</param>
-            <param name="size">The width and height of the element.</param>
-        </member>
         <member name="T:iFactr.UI.IGridBase">
             <summary>
             Defines a common base interface for all grid objects.
@@ -11253,302 +11683,6 @@
             <summary>
             Gets a collection of the rows that currently make up the grid.
             </summary>
-        </member>
-        <member name="T:iFactr.UI.Converter">
-            <summary>
-            Provides methods for creating <see cref="T:iFactr.UI.ICell"/> instances from various <see cref="T:iFactr.Core.Layers.iItem"/>s and <see cref="T:iFactr.Core.Forms.Field"/>s.
-            These methods can be overridden in a derived class for customized behavior.
-            </summary>
-        </member>
-        <member name="M:iFactr.UI.Converter.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:iFactr.UI.Converter"/> class.
-            </summary>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(System.Object,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Generates an <see cref="T:iFactr.UI.ICell"/> instance from the specified object.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style.  Can be <c>null</c>.</param>
-            <param name="view">The <see cref="T:iFactr.UI.IListView"/> instance that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use instead of creating a new one.  Can be <c>null</c>.</param>
-            <returns>The generated cell -or- <c>null</c> if no suitable conversion method can be found.</returns>
-            <exception cref="T:System.ArgumentNullException">Thrown when the <paramref name="item"/> or <paramref name="view"/> is <c>null</c>.</exception>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.iBlock,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.iBlock"/>.
-            </summary>
-            <param name="block">The block from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the block style,
-            or <c>null</c> if the block will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified block.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.iPanel,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.iPanel"/>.
-            </summary>
-            <param name="panel">The block from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the panel style,
-            or <c>null</c> if the panel will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified panel.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.iItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.iItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.ContentItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.ContentItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.MessageItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.MessageItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.MultiLineSubtextItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.MultiLineSubtextItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.RightSubtextItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.RightSubtextItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.ShopItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.ShopItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.SubtextBelowAndBesideItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.SubtextBelowAndBesideItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.SubtextItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.SubtextItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Layers.VariableContentItem,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Layers.VariableContentItem"/>.
-            </summary>
-            <param name="item">The item from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the item style,
-            or <c>null</c> if the item will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified item.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.BoolField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.BoolField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.ButtonField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.ButtonField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.DateField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.DateField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.DrawingField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.DrawingField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.EmailField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.EmailField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.LabelField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.LabelField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.MultiLineTextField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.MultiLineTextField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.NavigationField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.NavigationField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.NumericField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.NumericField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.SelectListField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.SelectListField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.SliderField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.SliderField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(iFactr.Core.Forms.TextField,iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.TextField"/>.
-            </summary>
-            <param name="field">The field from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the field style,
-            or <c>null</c> if the field will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified field.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToCell(System.Collections.Generic.IEnumerable{iFactr.Core.Forms.AggregateFieldset},iFactr.Core.Styles.Style,iFactr.UI.IListView,iFactr.UI.ICell)">
-            <summary>
-            Called when an <see cref="T:iFactr.UI.ICell"/> instance is needed for the specified <see cref="T:iFactr.Core.Forms.AggregateFieldset"/>s.
-            </summary>
-            <param name="fieldsets">The fieldsets from which to generate the cell.</param>
-            <param name="layerStyle">The <see cref="T:iFactr.Core.Styles.Style"/> instance that describes the fieldsets' style,
-            or <c>null</c> if the fieldsets will use the default style.</param>
-            <param name="view">The view that the cell will reside in.</param>
-            <param name="cell">An <see cref="T:iFactr.UI.ICell"/> instance to use in place of a new one, or <c>null</c> if a new one is needed.</param>
-            <returns>The generated cell for the specified fieldsets.</returns>
-        </member>
-        <member name="M:iFactr.UI.Converter.ConvertToControl(iFactr.Core.Forms.Field,MonoCross.Navigation.IMXView,MonoCross.Utilities.TypeSwitch,iFactr.UI.Controls.IControl)">
-            <summary>
-            Converts a Field to a Control.
-            </summary>
-            <param name="field">The <see cref="T:iFactr.Core.Forms.Field"/> to convert.</param>
-            <param name="view"></param>
-            <param name="typeSwitch">A <see cref="T:MonoCross.Utilities.TypeSwitch"/> to be used with multiple calls to this method; otherwise <c>null</c> to automatically initialize a switch.</param>
-            <param name="recycledControl">An <see cref="T:iFactr.UI.Controls.IControl"/> to recycle or initialize the returned object; otherwise <c>null</c> to automatically initializze the control.</param>
-            <returns>An <see cref="T:iFactr.UI.Controls.IControl"/> generated from the given field.</returns>
         </member>
         <member name="T:iFactr.UI.AlertButtons">
             <summary>

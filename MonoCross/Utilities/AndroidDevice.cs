@@ -1,12 +1,12 @@
-﻿using System.IO;
-using Android.App;
+﻿using Android.App;
+using MonoCross.Navigation;
 using MonoCross.Utilities.Encryption;
-using MonoCross.Utilities.Storage;
+using MonoCross.Utilities.ImageComposition;
 using MonoCross.Utilities.Logging;
 using MonoCross.Utilities.Resources;
+using MonoCross.Utilities.Storage;
 using MonoCross.Utilities.Threading;
-using MonoCross.Navigation;
-using MonoCross.Utilities.ImageComposition;
+using System.IO;
 
 namespace MonoCross.Utilities
 {
@@ -30,10 +30,9 @@ namespace MonoCross.Utilities
                 var path = args.Length > 0 ? args[0] as string : null;
                 return new AndroidLogger(path ?? Path.Combine(SessionDataPath, "Log"));
             });
-            MXContainer.RegisterSingleton<IEncryption>(typeof(AndroidEncryption));
+            MXContainer.RegisterSingleton<IEncryption>(typeof(AesEncryption));
             MXContainer.RegisterSingleton<IFile>(typeof(AndroidFile));
             MXContainer.RegisterSingleton<IThread>(typeof(AndroidThread));
-            MXContainer.RegisterSingleton<IReflector>(typeof(AndroidReflector));
             MXContainer.RegisterSingleton<IResources>(typeof(AndroidResources));
             MXContainer.RegisterSingleton<ICompositor>(typeof(AndroidCompositor));
         }

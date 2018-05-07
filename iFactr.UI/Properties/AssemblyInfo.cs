@@ -9,7 +9,6 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Zebra Technologies Corporation")]
 [assembly: AssemblyProduct("iFactr.UI")]
-[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,9 +20,7 @@ using System.Resources;
 //      Build Number
 //      Revision
 //
+[assembly: AssemblyCopyright("Copyright ©  " +
+"2018")]
 [assembly: AssemblyVersion("4.0.0.42")]
-[assembly: AssemblyInformationalVersion("Branch - master (Hash: Working Tree)")]
-
-#if !NETCF
-[assembly: NeutralResourcesLanguage("en-US")]
-#endif
+[assembly: AssemblyInformationalVersion("4.0.0.42-master.WorkingTree")]

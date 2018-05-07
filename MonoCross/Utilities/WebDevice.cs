@@ -1,31 +1,20 @@
-﻿using System.IO;
-using System.Web;
-
+﻿using MonoCross.Navigation;
 using MonoCross.Utilities.Encryption;
-using MonoCross.Utilities.Storage;
 using MonoCross.Utilities.Network;
-using MonoCross.Utilities.Threading;
-
-using MonoCross.Navigation;
 using MonoCross.Utilities.Resources;
-using MonoCross.Utilities.Logging;
+using MonoCross.Utilities.Threading;
 using MonoCross.Web;
+using System.Web;
 
 namespace MonoCross.Utilities
 {
     public class WebDevice : Device
     {
-        public WebDevice() { }
-
         public override void Initialize()
         {
-            DirectorySeparatorChar = Path.DirectorySeparatorChar;
-            MXContainer.RegisterSingleton<IThread>(typeof(TaskThread));
-            MXContainer.RegisterSingleton<IFile>(typeof(BasicFile));
-            MXContainer.RegisterSingleton<IEncryption>(typeof(AesEncryption));
-            MXContainer.RegisterSingleton<IReflector>(typeof(BasicReflector));
+            MXContainer.RegisterSingleton<IThread>(new TaskThread { UiSynchronizationContext = System.Threading.SynchronizationContext.Current, });
             MXContainer.RegisterSingleton<IResources>(typeof(WindowsResources));
-            MXContainer.RegisterSingleton<ILog>(typeof(BasicLogger), () => new BasicLogger(Path.Combine(DataPath, "Log")));
+            MXContainer.RegisterSingleton<IEncryption>(typeof(AesEncryption));
             MXContainer.RegisterSingleton<ImageComposition.ICompositor>(typeof(ImageComposition.GdiPlusCompositor));
 
             NetworkPostMethod = NetworkPostMethod.ImmediateSynchronous;
@@ -36,6 +25,21 @@ namespace MonoCross.Utilities
                 session.Add(kvp);
             }
             Session = session;
+        }
+
+        public static new WebDevice Instance
+        {
+            get
+            {
+                var device = Device.Instance as WebDevice;
+                if (device == null)
+                {
+                    device = new WebDevice();
+                    Device.Instance = device;
+                }
+                return device;
+            }
+            set { Device.Instance = value; }
         }
 
         /// <summary>
@@ -59,6 +63,5 @@ namespace MonoCross.Utilities
                 HttpContext.Current.Session["SessionDataAppend"] = value;
             }
         }
-
     }
 }
