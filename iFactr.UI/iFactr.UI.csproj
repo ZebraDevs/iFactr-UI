@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <BuildVersion Condition=" '$(BuildVersion)' == '' ">4.1.0</BuildVersion>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Company>Zebra Technologies Corporation</Company>
     <Description>The iFactr UI API library</Description>
@@ -45,9 +46,9 @@
     </Exec>
 
     <PropertyGroup>
-      <AssemblyVersion>4.0.0.$(BuildRev)</AssemblyVersion>
-      <FileVersion>4.0.0.$(BuildRev)</FileVersion>
-      <Version>4.0.0.$(BuildRev)-$(Branch).$(CommitHash)</Version>
+      <AssemblyVersion>$(BuildVersion).$(BuildRev)</AssemblyVersion>
+      <FileVersion>$(AssemblyVersion)</FileVersion>
+      <Version>$(AssemblyVersion)-$(Branch).$(CommitHash)</Version>
       <Copyright>Copyright ©  $([System.DateTime]::Now.ToString(`yyyy`))</Copyright>
     </PropertyGroup>
   </Target>

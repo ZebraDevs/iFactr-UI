@@ -22,5 +22,5 @@ using System.Resources;
 //
 [assembly: AssemblyCopyright("Copyright ©  " +
 "2018")]
-[assembly: AssemblyVersion("4.0.0.42")]
-[assembly: AssemblyInformationalVersion("4.0.0.42-master.WorkingTree")]
+[assembly: AssemblyVersion("4.1.0.42")]
+[assembly: AssemblyInformationalVersion("4.1.0.42-master.WorkingTree")]
