@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <BuildVersion Condition=" '$(BuildVersion)' == '' ">4.1.0</BuildVersion>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3B519F92-1F02-4EB5-BA88-D0FC2999981F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MonoCross.Utilities</RootNamespace>
+    <AssemblyName>MonoCross.Utilities.NET</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MonoCross">
+      <HintPath>..\Distribution\MonoCross.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConsoleDevice.cs" />
+    <Compile Include="WebDevice.cs" />
+    <Compile Include="WebSessionDictionary.cs" />
+    <Compile Include="WpfDevice.cs" />
+    <Compile Include="ImageComposition\GdiPlusCompositor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threading\DispatcherThread.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="BeforeBuild">
+    <Exec Condition=" '$(BuildRev)'==''" WorkingDirectory="$(ProjectDir)" Command="git rev-list --count HEAD" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="BuildRev" />
+    </Exec>
+    <Exec Condition=" '$(Branch)'==''" WorkingDirectory="$(ProjectDir)" Command="git rev-parse --abbrev-ref HEAD" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="Branch" />
+    </Exec>
+    <Exec Condition=" '$(CommitHash)'==''" WorkingDirectory="$(ProjectDir)" Command="git rev-parse --short HEAD" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="CommitHash" />
+    </Exec>
+    <PropertyGroup>
+      <AssemblyVersion>$(BuildVersion).$(BuildRev)</AssemblyVersion>
+      <FileVersion>$(AssemblyVersion)</FileVersion>
+      <Version>$(AssemblyVersion)-$(Branch).$(CommitHash)</Version>
+      <Copyright>Copyright ©  $([System.DateTime]::Now.ToString(`yyyy`))</Copyright>
+    </PropertyGroup>
+    <UpdateAssemblyInfo AssemblyInfo="$(ProjectDir)Properties/AssemblyInfo.cs" Version="$(FileVersion)" Branch="$(Branch)" CommitHash="$(CommitHash)" Copyright="$(Copyright)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="$(TargetDir)$(TargetName).dll;$(TargetDir)$(TargetName).pdb" DestinationFolder="../Distribution" />
+    <!--<Exec WorkingDirectory="$(ProjectDir)" Command="git checkout -><- Properties/AssemblyInfo.cs" />-->
+  </Target>
+  <UsingTask TaskName="UpdateAssemblyInfo" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+        <AssemblyInfo ParameterType="System.String" Required="true" />
+        <Version ParameterType="System.String" Required="true" />
+        <Branch ParameterType="System.String" Required="true" />
+        <CommitHash ParameterType="System.String" Required="true" />
+        <Copyright ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+        <Using Namespace="System.IO"/>
+        <Using Namespace="System.Diagnostics"/>
+        <Code Type="Fragment" Language="cs"><![CDATA[
+	var lines = File.ReadAllLines(AssemblyInfo);
+	File.WriteAllLines(AssemblyInfo, lines.Take(lines.Length - 4).Union(new[] {
+		"[assembly: AssemblyVersion(\"" + Version + "\")]",
+		"[assembly: AssemblyFileVersion(\"" + Version + "\")]",
+		"[assembly: AssemblyInformationalVersion(\"" + Version + "-" + Branch + "." + CommitHash + "\")]",
+		"[assembly: AssemblyCopyright(\"" + Copyright + "\")]",
+	}));
+]]></Code>
+    </Task>
+  </UsingTask>
+</Project>
