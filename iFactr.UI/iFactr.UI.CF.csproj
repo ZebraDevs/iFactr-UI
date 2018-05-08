@@ -362,6 +362,6 @@ for /f "usebackq delims==" %25%25I in ("$(ProjectDir)Properties\AssemblyInfo.cs"
 :EOF 
 
 exit /b</PreBuildEvent>
-    <PostBuildEvent>copy "$(TargetDir)$(TargetName).*" "$(SolutionDir)Distribution"</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)$(TargetName).*" "$(ProjectDir)\..\Distribution"</PostBuildEvent>
   </PropertyGroup>
 </Project>
