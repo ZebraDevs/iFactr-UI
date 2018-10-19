@@ -192,7 +192,7 @@ namespace iFactr.UI
                         controlIndex.RowIndex = candidates.Any() ? candidates.Min() : rows.Count;
                     }
 
-                    while (control.RowSpan + controlIndex.RowIndex >= rows.Count)
+                    while (control.RowSpan + controlIndex.RowIndex > rows.Count)
                     {
                         rows.Add(Row.AutoSized);
                     }
