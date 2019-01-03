@@ -11,11 +11,7 @@
     </Target>
 
     <Target Name="SubtreeUpdate">
-        <Exec Command="git rm -r MonoCross"/>
-        <Delete Files="MonoCross"/>
-        <Exec Command="git commit -m &quot;Removed MonoCross Subtree with intention of readding it (subtree pull workaround)&quot;" />
-        <!-- TODO: Remove previous lines in task and use subtree pull when next major Git version is released -->
-        <Exec Command="git subtree add --prefix=MonoCross https://github.com/MonoCross/MonoCross.git master --squash"/>
+        <Exec Command="git subtree pull --prefix=MonoCross https://github.com/MonoCross/MonoCross.git master --squash"/>
     </Target>
 
     <Target Name="Clean">
