@@ -78,9 +78,7 @@ namespace iFactr.UI
             get { return typeof(T); }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private ITabView NativeView
         {
             get { return (ITabView)Pair; }

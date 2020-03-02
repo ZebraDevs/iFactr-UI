@@ -65,9 +65,7 @@ namespace iFactr.Core.Targets
             get { return _converter ?? (_converter = new Converter()); }
             set { _converter = value; }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private Converter _converter;
 
         /// <summary>
@@ -467,7 +465,7 @@ namespace iFactr.Core.Targets
                 if (tabs != null && tabs.TabItems != null && tabs.TabItems.Count == 0)
                     throw new NotSupportedException("NavigationTabs must have at least 1 Tab.");
                 if (layer is FormLayer)
-                    layer.Items.AddRange(((FormLayer)layer).Fieldsets.Cast<iLayerItem>()); //Cast required for NETCF
+                    layer.Items.AddRange(((FormLayer)layer).Fieldsets);
                 if (layer.CompositeParent != null)
                     layer.CompositeParent.Items.AddRange(layer.Items);
 

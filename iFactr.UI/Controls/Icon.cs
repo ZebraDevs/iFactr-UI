@@ -61,17 +61,11 @@ namespace iFactr.Core.Controls
             return "<img "
              + (Name == null ? null : ("title=\"" + Name + "\" "))
              + (Align == null ? null : ("align=\"" + Align + "\" "))
-#if NETCF
-             + (Width == null ? null : "width=\"" + Width + "\" ")
-             + (Height == null ? null : "height=\"" + Height + "\" ")
-             + "style=\"padding:3px\" src=\""
-#else
              + "style=\"padding:5px;max-height:"
              + (Height ?? "none")
              + ";max-width:"
              + (Width ?? "100%")
              + "\" src=\""
-#endif
              + HtmlTextExtensions.VirtualPath(Location)
              + "\"   />";
         }

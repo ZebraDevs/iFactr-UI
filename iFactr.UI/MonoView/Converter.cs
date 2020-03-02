@@ -18,9 +18,7 @@ namespace iFactr.UI
     /// </summary>
     public class Converter
     {
-#if !NETCF
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-#endif
         private readonly IEnumerable<MethodInfo> _cellConversionMethods;
 
         /// <summary>

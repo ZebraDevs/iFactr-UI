@@ -71,9 +71,7 @@ namespace iFactr.UI.Controls
             set { NativeControl.Stretch = value; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IImage NativeControl
         {
             get { return (IImage)Pair; }
@@ -132,4 +130,3 @@ namespace iFactr.UI.Controls
         }
     }
 }
-

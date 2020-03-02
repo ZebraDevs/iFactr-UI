@@ -1,9 +1,7 @@
 ﻿using System;
 using iFactr.Core;
 using MonoCross.Navigation;
-#if !NETCF
 using System.Diagnostics;
-#endif
 
 namespace iFactr.UI
 {
@@ -73,9 +71,7 @@ namespace iFactr.UI
         /// <summary>
         /// Gets or sets the native object that is paired with this instance.  This can be set only once.
         /// </summary>
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         protected ISectionFooter Pair
         {
             get
@@ -95,14 +91,10 @@ namespace iFactr.UI
                 }
             }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private ISectionFooter pair;
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         IPairable IPairable.Pair
         {
             get { return Pair; }

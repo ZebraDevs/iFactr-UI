@@ -191,9 +191,7 @@ namespace iFactr.UI.Controls
             set { NativeControl.PlaceholderColor = value; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private IPasswordBox NativeControl
         {
             get { return (IPasswordBox)Pair; }
@@ -232,4 +230,3 @@ namespace iFactr.UI.Controls
 		}
 	}
 }
-

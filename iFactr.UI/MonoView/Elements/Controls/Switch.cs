@@ -79,9 +79,7 @@ namespace iFactr.UI.Controls
 			set { NativeControl.Value = value; }
 		}
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private ISwitch NativeControl
         {
             get { return (ISwitch)Pair; }
@@ -112,4 +110,3 @@ namespace iFactr.UI.Controls
 		}
 	}
 }
-

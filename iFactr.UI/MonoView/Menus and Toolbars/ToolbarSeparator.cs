@@ -29,9 +29,7 @@ namespace iFactr.UI
         /// <summary>
         /// Gets or sets the native object that is paired with the toolbar separator.  This can be set only once.
         /// </summary>
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         protected IToolbarSeparator Pair
         {
             get
@@ -51,14 +49,10 @@ namespace iFactr.UI
                 }
             }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IToolbarSeparator pair;
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         IPairable IPairable.Pair
         {
             get { return Pair; }

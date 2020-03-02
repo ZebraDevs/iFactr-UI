@@ -101,9 +101,7 @@ namespace iFactr.UI
         /// <summary>
         /// Gets or sets the native object that is paired with the menu.  This can be set only once.
         /// </summary>
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         protected IMenu Pair
         {
             get
@@ -123,14 +121,10 @@ namespace iFactr.UI
                 }
             }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IMenu pair;
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         IPairable IPairable.Pair
         {
             get { return Pair; }
@@ -208,4 +202,3 @@ namespace iFactr.UI
         }
     }
 }
-

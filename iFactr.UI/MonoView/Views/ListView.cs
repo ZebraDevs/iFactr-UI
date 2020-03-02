@@ -194,27 +194,21 @@ namespace iFactr.UI
             get { return NativeView.ValidationErrors; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         CellDelegate IListView.CellRequested
         {
             get { return NativeView.CellRequested; }
             set { NativeView.CellRequested = value ?? OnCellRequested; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         ItemIdDelegate IListView.ItemIdRequested
         {
             get { return NativeView.ItemIdRequested; }
             set { NativeView.ItemIdRequested = value ?? OnItemIdRequested; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         [NativeOnly("http://support.ifactr.com/kb/webkit-compatibility")]
         ShouldNavigateDelegate IHistoryEntry.ShouldNavigate
         {
@@ -249,9 +243,7 @@ namespace iFactr.UI
             get { return typeof(T); }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IListView NativeView
         {
             get { return (IListView)Pair; }

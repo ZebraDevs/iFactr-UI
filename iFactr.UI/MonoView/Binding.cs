@@ -37,9 +37,7 @@ namespace iFactr.UI
                 }
             }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private object source;
 
         /// <summary>
@@ -77,30 +75,18 @@ namespace iFactr.UI
         }
         private WeakReference target;
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private PropertyInfo[] sourceInfos, targetInfos;
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private object[] sourceObjects;
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private WeakReference[] targetObjects;
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private object[][] sourceIndices, targetIndices;
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private bool isActive;
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private readonly SynchronizationContext context;
 
         /// <summary>

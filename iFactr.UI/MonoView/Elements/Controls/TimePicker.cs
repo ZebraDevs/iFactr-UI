@@ -92,9 +92,7 @@ namespace iFactr.UI.Controls
             set { NativeControl.TimeFormat = value; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private ITimePicker NativeControl
         {
             get { return (ITimePicker)Pair; }
@@ -133,4 +131,3 @@ namespace iFactr.UI.Controls
         }
 	}
 }
-

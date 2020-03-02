@@ -180,9 +180,7 @@ namespace iFactr.UI
     /// <summary>
     /// Represents a collection of <see cref="iFactr.UI.Column"/> objects.
     /// </summary>
-#if !NETCF
     [DebuggerDisplay("Count = {Count}")]
-#endif
     public sealed class ColumnCollection : List<Column>
     {
         /// <summary>

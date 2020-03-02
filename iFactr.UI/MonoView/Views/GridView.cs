@@ -197,9 +197,7 @@ namespace iFactr.UI
         /// Invoked when the view is being pushed under or popped off of the top of the view stack.
         /// Returning a value of <c>false</c> will cancel the navigation.
         /// </summary>
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         [NativeOnly("http://support.ifactr.com/kb/webkit-compatibility")]
         ShouldNavigateDelegate IHistoryEntry.ShouldNavigate
         {
@@ -252,9 +250,7 @@ namespace iFactr.UI
             get { return typeof(T); }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IGridView NativeView
         {
             get { return (IGridView)Pair; }

@@ -25,9 +25,7 @@ namespace iFactr.UI
     /// <summary>
     /// Represents a group of <see cref="ICell"/> objects within an <see cref="IListView"/> instance.
     /// </summary>
-#if !NETCF
     [DebuggerDisplay("Item Count = {ItemCount}")]
-#endif
     public class Section
     {
         /// <summary>
@@ -56,9 +54,7 @@ namespace iFactr.UI
                 _itemCount = value;
             }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private int _itemCount;
 
         /// <summary>
@@ -123,9 +119,7 @@ namespace iFactr.UI
     /// <summary>
     /// Represents a collection of <see cref="Section"/> objects.
     /// </summary>
-#if !NETCF
     [DebuggerDisplay("Count = {Count}")]
-#endif
     public sealed class SectionCollection : IList<Section>
     {
         /// <summary>

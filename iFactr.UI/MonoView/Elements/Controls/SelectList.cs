@@ -107,9 +107,7 @@ namespace iFactr.UI.Controls
 			set { NativeControl.SelectedItem = value; }
 		}
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private ISelectList NativeControl
         {
             get { return (ISelectList)Pair; }
@@ -158,4 +156,3 @@ namespace iFactr.UI.Controls
         }
 	}
 }
-

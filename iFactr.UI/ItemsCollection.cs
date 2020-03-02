@@ -6,11 +6,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using MonoCross.Utilities;
 
-#if NETCF
-using System.Collections.ObjectModel;
-#else
 using System.Diagnostics;
-#endif
 
 
 namespace iFactr.UI
@@ -18,12 +14,8 @@ namespace iFactr.UI
     /// <summary>
     /// Represents a thread-safe collection of elements.
     /// </summary>
-#if !NETCF
     [DebuggerDisplay("Count = {Count}")]
-#endif
-#if !PCL
     [Serializable]
-#endif
     public class ItemsCollection<T> : IList<T>, IList, IXmlSerializable
     {
         /// <summary>
@@ -70,9 +62,7 @@ namespace iFactr.UI
         /// <summary>
         /// Gets the sync root object used to maintain synchronization.
         /// </summary>
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         public object SyncRoot
         {
             get { return internalList; }
@@ -121,9 +111,7 @@ namespace iFactr.UI
             }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-#endif
         private List<T> internalList;
 
         /// <summary>
@@ -152,7 +140,6 @@ namespace iFactr.UI
             internalList = new List<T>(collection);
         }
 
-#if !PCL
         /// <summary>
         /// Converts the items in this list to a different type
         /// </summary>
@@ -226,7 +213,6 @@ namespace iFactr.UI
         {
             return internalList.TrueForAll(match);
         }
-#endif
 
         /// <summary>
         /// Adds the specified item to the end of the collection.
@@ -251,25 +237,6 @@ namespace iFactr.UI
                 internalList.AddRange(collection);
             }
         }
-
-#if NETCF
-        /// <summary>
-        /// Returns a read-only wrapper to this collection.
-        /// </summary>
-        public ReadOnlyCollection<T> AsReadOnly()
-        {
-            return internalList.AsReadOnly();
-        }
-
-        /// <summary>
-        /// Performs the specified action on each element of the collection.
-        /// </summary>
-        /// <param name="action">The action delegate to perform on each element of the collection.</param>
-        public void ForEach(Action<T> action)
-        {
-            internalList.ForEach(action);
-        }
-#endif
 
         /// <summary>
         /// Searches the sorted collection for an element and returns the zero-based index of that element.

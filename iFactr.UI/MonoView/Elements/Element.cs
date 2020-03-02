@@ -161,9 +161,7 @@ namespace iFactr.UI.Controls
         /// <summary>
         /// Gets or sets the native object that is paired with the element.  This can be set only once.
         /// </summary>
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         protected IElement Pair
         {
             get
@@ -188,14 +186,10 @@ namespace iFactr.UI.Controls
                 }
             }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IElement pair;
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         IPairable IPairable.Pair
         {
             get { return Pair; }

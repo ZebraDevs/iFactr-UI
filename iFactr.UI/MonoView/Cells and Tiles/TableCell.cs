@@ -47,9 +47,7 @@ namespace iFactr.UI
             get { return ColumnHeaders.Count; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IGridCell NativeCell
         {
             get { return (IGridCell)base.Pair; }

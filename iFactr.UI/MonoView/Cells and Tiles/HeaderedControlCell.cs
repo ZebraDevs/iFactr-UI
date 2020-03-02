@@ -110,9 +110,7 @@ namespace iFactr.UI
             set { NativeCell.SelectionStyle = value; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IGridCell NativeCell
         {
             get { return (IGridCell)base.Pair; }

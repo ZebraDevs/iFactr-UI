@@ -92,9 +92,7 @@ namespace iFactr.UI.Controls
 			set { NativeControl.DateFormat = value; }
 		}
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private IDatePicker NativeControl
         {
             get { return (IDatePicker)Pair; }
@@ -133,4 +131,3 @@ namespace iFactr.UI.Controls
         }
 	}
 }
-

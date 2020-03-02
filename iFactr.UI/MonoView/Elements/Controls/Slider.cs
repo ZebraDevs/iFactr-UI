@@ -96,9 +96,7 @@ namespace iFactr.UI.Controls
 			set { NativeControl.Value = value; }
 		}
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private ISlider NativeControl
         {
             get { return (ISlider)Pair; }
@@ -144,4 +142,3 @@ namespace iFactr.UI.Controls
 		}
 	}
 }
-

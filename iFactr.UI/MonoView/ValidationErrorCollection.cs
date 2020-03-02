@@ -7,14 +7,10 @@ namespace iFactr.UI
     /// <summary>
     /// Represents a collection of control submission keys and any errors that have occurred while validating the control.
     /// </summary>
-#if !NETCF
     [DebuggerDisplay("Count = {Count}")]
-#endif
     public sealed class ValidationErrorCollection : IDictionary<string, string[]>
     {
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IDictionary<string, string[]> items;
 
         /// <summary>
@@ -25,9 +21,7 @@ namespace iFactr.UI
             get { return items.Count; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         bool ICollection<KeyValuePair<string, string[]>>.IsReadOnly
         {
             get { return false; }

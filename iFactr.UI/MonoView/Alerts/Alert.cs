@@ -65,9 +65,7 @@ namespace iFactr.UI
             get { return nativeAlert.Buttons; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IAlert nativeAlert;
 
         /// <summary>
@@ -94,4 +92,3 @@ namespace iFactr.UI
         }
     }
 }
-

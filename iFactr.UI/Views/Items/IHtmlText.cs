@@ -337,14 +337,7 @@ namespace iFactr.Core.Layers
             string cleanPath = path;
             int endPath = cleanPath.IndexOf('\'');
             if (endPath > -1)
-#if !NETCF
                 cleanPath = cleanPath.Remove(endPath);
-#else 
-                cleanPath = cleanPath.Remove(endPath, cleanPath.Length - endPath);
-#endif
-
-            //            if (!new Uri(cleanPath, UriKind.RelativeOrAbsolute).IsAbsoluteUri && !cleanPath.StartsWith(iApp.Factory.WebAppVirtualPath))
-            //                path = (iApp.Factory.WebAppVirtualPath + path).Replace("//", "/");
             return path;
         }
     }

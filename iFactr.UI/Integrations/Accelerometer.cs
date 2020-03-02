@@ -26,9 +26,7 @@ namespace iFactr.Integrations
             get { return nativeAccel.IsActive; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private readonly IAccelerometer nativeAccel;
 
         /// <summary>

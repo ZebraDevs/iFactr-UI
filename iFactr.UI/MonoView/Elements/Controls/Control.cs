@@ -63,9 +63,7 @@ namespace iFactr.UI.Controls
         }
 
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IControl NativeControl
         {
             get { return (IControl)Pair; }
@@ -90,4 +88,3 @@ namespace iFactr.UI.Controls
         }
     }
 }
-

@@ -11510,6 +11510,53 @@
             <returns>A hash code for this instance that is suitable for use in
             hashing algorithms and data structures such as a hash table.</returns>
         </member>
+        <member name="T:iFactr.UI.Controls.Grid">
+            <summary>
+            Represents an object that acts as a grid made up of columns and rows for laying out various UI elements.
+            </summary>
+        </member>
+        <member name="F:iFactr.UI.Controls.Grid.PaddingProperty">
+            <summary>
+            The name of the <see cref="P:Padding"/> property.  Use this when binding to the property.  This field is read-only.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.Grid.Columns">
+            <summary>
+            Gets a collection of the columns that currently make up the grid.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.Grid.Padding">
+            <summary>
+            Gets or sets the amount of spacing between the edges of the grid and the children within it.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.Grid.Rows">
+            <summary>
+            Gets a collection of the rows that currently make up the grid.
+            </summary>
+        </member>
+        <member name="P:iFactr.UI.Controls.Grid.Children">
+            <summary>
+            Gets a collection of the UI elements that are currently contained within the grid.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.Controls.Grid.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:iFactr.UI.Controls.Grid"/> class.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.Controls.Grid.AddChild(iFactr.UI.Controls.IElement)">
+            <summary>
+            Adds the specified <see cref="T:iFactr.UI.Controls.IElement"/> object to the grid.
+            </summary>
+            <param name="element">The element to be added to the grid.</param>
+        </member>
+        <member name="M:iFactr.UI.Controls.Grid.RemoveChild(iFactr.UI.Controls.IElement)">
+            <summary>
+            Removes the specified <see cref="T:iFactr.UI.Controls.IElement"/> object from the grid.
+            </summary>
+            <param name="element">The element to be removed from the grid.</param>
+        </member>
         <member name="T:iFactr.UI.Controls.IElement">
             <summary>
             Defines a UI element that can be sized and arranged within a view.
@@ -11606,6 +11653,11 @@
             Removes the specified <see cref="T:iFactr.UI.Controls.IElement"/> object from this instance.
             </summary>
             <param name="element">The element to be removed from this instance.</param>
+        </member>
+        <member name="T:iFactr.UI.Controls.IGrid">
+            <summary>
+            Defines an object that acts as a grid made up of columns and rows for laying out various UI elements.
+            </summary>
         </member>
         <member name="T:iFactr.UI.Controls.ControlExtensions">
             <summary>
@@ -14178,6 +14230,39 @@
         <member name="M:iFactr.UI.SearchBox.Focus">
             <summary>
             Programmatically sets input focus to the search box.
+            </summary>
+        </member>
+        <member name="M:iFactr.UI.SearchBox.FilterValue(System.String,System.String)">
+            <summary>
+            Performs a default search query filter on the specified <paramref name="value"/> and returns the result.
+            </summary>
+            <param name="value">The value to be filtered.</param>
+            <param name="searchQuery">The query with which to filter the <paramref name="value"/>.</param>
+            <returns>The result of the filter.</returns>
+        </member>
+        <member name="T:iFactr.UI.SearchFilterResult">
+            <summary>
+            Describes how a value is filtered by a search query.
+            </summary>
+        </member>
+        <member name="F:iFactr.UI.SearchFilterResult.ImplicitExclusion">
+            <summary>
+            The value did not match the query.
+            </summary>
+        </member>
+        <member name="F:iFactr.UI.SearchFilterResult.ExplicitExclusion">
+            <summary>
+            The value matches an exclude query.
+            </summary>
+        </member>
+        <member name="F:iFactr.UI.SearchFilterResult.ImplicitInclusion">
+            <summary>
+            The value implicitly matches the query.
+            </summary>
+        </member>
+        <member name="F:iFactr.UI.SearchFilterResult.ExplicitInclusion">
+            <summary>
+            The value matches the query.
             </summary>
         </member>
         <member name="T:iFactr.UI.Size">

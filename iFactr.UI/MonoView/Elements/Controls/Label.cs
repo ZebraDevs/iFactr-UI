@@ -96,9 +96,7 @@ namespace iFactr.UI.Controls
             set { NativeControl.TextAlignment = value; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private ILabel NativeControl
         {
             get { return (ILabel)Pair; }
@@ -128,4 +126,3 @@ namespace iFactr.UI.Controls
 		}
 	}
 }
-

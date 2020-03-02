@@ -26,9 +26,7 @@ namespace iFactr.Integrations
             get { return nativeGeo.IsActive; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private readonly IGeoLocation nativeGeo;
 
         /// <summary>

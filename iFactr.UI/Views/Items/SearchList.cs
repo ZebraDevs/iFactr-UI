@@ -60,11 +60,7 @@ namespace iFactr.Core.Layers
             }
 
             string[] delim = new string[] { " " };
-#if !NETCF
             string[] terms = searchTerm.ToLower().Split(delim, StringSplitOptions.RemoveEmptyEntries);
-#else
-            string[] terms = searchTerm.ToLower().Split(delim.First().ToCharArray());
-#endif
             List<iItem> results = ItemsSource.Where(item =>
                                        item.Text.Clean().Contains(terms[0]) ||
                                        item.Subtext.Clean().Contains(terms[0])).ToList();

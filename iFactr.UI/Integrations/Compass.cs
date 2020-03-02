@@ -26,9 +26,7 @@ namespace iFactr.Integrations
             get { return nativeCompass.IsActive; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private readonly ICompass nativeCompass;
 
         /// <summary>

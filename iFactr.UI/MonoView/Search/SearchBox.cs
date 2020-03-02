@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using iFactr.Core;
 using MonoCross.Navigation;
 
 namespace iFactr.UI
@@ -110,9 +109,7 @@ namespace iFactr.UI
         /// <summary>
         /// Gets or sets the native object that is paired with the search box.  This can be set only once.
         /// </summary>
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         protected ISearchBox Pair
         {
             get
@@ -132,14 +129,10 @@ namespace iFactr.UI
                 }
             }
         }
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private ISearchBox pair;
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         IPairable IPairable.Pair
         {
             get { return Pair; }
@@ -166,140 +159,139 @@ namespace iFactr.UI
             Pair.Focus();
         }
 
-        // TODO: Uncomment for 3.6
-        ///// <summary>
-        ///// Performs a default search query filter on the specified <paramref name="value"/> and returns the result.
-        ///// </summary>
-        ///// <param name="value">The value to be filtered.</param>
-        ///// <param name="searchQuery">The query with which to filter the <paramref name="value"/>.</param>
-        ///// <returns>The result of the filter.</returns>
-        //public static SearchFilterResult FilterValue(string value, string searchQuery)
-        //{
-        //    if (string.IsNullOrEmpty(searchQuery))
-        //    {
-        //        return SearchFilterResult.ExplicitInclusion;
-        //    }
+        /// <summary>
+        /// Performs a default search query filter on the specified <paramref name="value"/> and returns the result.
+        /// </summary>
+        /// <param name="value">The value to be filtered.</param>
+        /// <param name="searchQuery">The query with which to filter the <paramref name="value"/>.</param>
+        /// <returns>The result of the filter.</returns>
+        public static SearchFilterResult FilterValue(string value, string searchQuery)
+        {
+            if (string.IsNullOrEmpty(searchQuery))
+            {
+                return SearchFilterResult.ExplicitInclusion;
+            }
 
-        //    if (string.IsNullOrEmpty(value))
-        //    {
-        //        return SearchFilterResult.ImplicitExclusion;
-        //    }
+            if (string.IsNullOrEmpty(value))
+            {
+                return SearchFilterResult.ImplicitExclusion;
+            }
 
-        //    searchQuery = searchQuery.ToUpper();
-        //    value = value.ToUpper();
+            searchQuery = searchQuery.ToUpper();
+            value = value.ToUpper();
 
-        //    for (int i = searchQuery.Length - 1; i >= 0; i--)
-        //    {
-        //        if (searchQuery[i] == '"' && i > 0)
-        //        {
-        //            int index = searchQuery.LastIndexOf('"', i - 1);
-        //            i = index < 0 ? i : index;
-        //            continue;
-        //        }
+            for (int i = searchQuery.Length - 1; i >= 0; i--)
+            {
+                if (searchQuery[i] == '"' && i > 0)
+                {
+                    int index = searchQuery.LastIndexOf('"', i - 1);
+                    i = index < 0 ? i : index;
+                    continue;
+                }
 
-        //        if (searchQuery[i] == '-')
-        //        {
-        //            if (i == searchQuery.Length - 1)
-        //            {
-        //                searchQuery = searchQuery.Remove(i).Trim();
-        //                i = searchQuery.Length;
-        //                continue;
-        //            }
+                if (searchQuery[i] == '-')
+                {
+                    if (i == searchQuery.Length - 1)
+                    {
+                        searchQuery = searchQuery.Remove(i).Trim();
+                        i = searchQuery.Length;
+                        continue;
+                    }
 
-        //            bool quoted = searchQuery[i + 1] == '"';
-        //            if (quoted && i == searchQuery.Length - 2)
-        //            {
-        //                searchQuery = searchQuery.Remove(i).Trim();
-        //                i = searchQuery.Length;
-        //                continue;
-        //            }
+                    bool quoted = searchQuery[i + 1] == '"';
+                    if (quoted && i == searchQuery.Length - 2)
+                    {
+                        searchQuery = searchQuery.Remove(i).Trim();
+                        i = searchQuery.Length;
+                        continue;
+                    }
 
-        //            int startIndex = quoted ? i + 2 : i + 1;
-        //            int closingIndex = quoted ? searchQuery.IndexOf('"', startIndex) : searchQuery.IndexOf(' ', startIndex);
-        //            if (closingIndex < 0)
-        //            {
-        //                closingIndex = searchQuery.Length;
-        //            }
+                    int startIndex = quoted ? i + 2 : i + 1;
+                    int closingIndex = quoted ? searchQuery.IndexOf('"', startIndex) : searchQuery.IndexOf(' ', startIndex);
+                    if (closingIndex < 0)
+                    {
+                        closingIndex = searchQuery.Length;
+                    }
 
-        //            string subquery = searchQuery.Substring(startIndex, closingIndex - startIndex);
-        //            if (subquery.Length > 0)
-        //            {
-        //                int valueLength = value.Length;
-        //                value = value.Replace(subquery, string.Empty);
-        //                if (value.Length != valueLength)
-        //                {
-        //                    return SearchFilterResult.ExplicitExclusion;
-        //                }
-        //            }
+                    string subquery = searchQuery.Substring(startIndex, closingIndex - startIndex);
+                    if (subquery.Length > 0)
+                    {
+                        int valueLength = value.Length;
+                        value = value.Replace(subquery, string.Empty);
+                        if (value.Length != valueLength)
+                        {
+                            return SearchFilterResult.ExplicitExclusion;
+                        }
+                    }
 
-        //            searchQuery = searchQuery.Remove(i, closingIndex - i).Trim();
-        //            if (i > searchQuery.Length)
-        //            {
-        //                i = searchQuery.Length;
-        //            }
-        //        }
-        //    }
+                    searchQuery = searchQuery.Remove(i, closingIndex - i).Trim();
+                    if (i > searchQuery.Length)
+                    {
+                        i = searchQuery.Length;
+                    }
+                }
+            }
 
-        //    if (searchQuery.Length == 0)
-        //    {
-        //        return SearchFilterResult.ImplicitInclusion;
-        //    }
+            if (searchQuery.Length == 0)
+            {
+                return SearchFilterResult.ImplicitInclusion;
+            }
 
-        //    int firstIndex = 0;
-        //    for (int i = 0; i < searchQuery.Length; i++)
-        //    {
-        //        char c = searchQuery[i];
-        //        if (c == '"')
-        //        {
-        //            if (i == searchQuery.Length - 1)
-        //            {
-        //                searchQuery = searchQuery.Remove(i).Trim();
-        //                if (searchQuery.Length == 0)
-        //                {
-        //                    return SearchFilterResult.ImplicitInclusion;
-        //                }
-        //                break;
-        //            }
+            int firstIndex = 0;
+            for (int i = 0; i < searchQuery.Length; i++)
+            {
+                char c = searchQuery[i];
+                if (c == '"')
+                {
+                    if (i == searchQuery.Length - 1)
+                    {
+                        searchQuery = searchQuery.Remove(i).Trim();
+                        if (searchQuery.Length == 0)
+                        {
+                            return SearchFilterResult.ImplicitInclusion;
+                        }
+                        break;
+                    }
 
-        //            int closingIndex = searchQuery.IndexOf('"', ++i);
-        //            if (closingIndex < 0)
-        //            {
-        //                closingIndex = searchQuery.Length;
-        //            }
+                    int closingIndex = searchQuery.IndexOf('"', ++i);
+                    if (closingIndex < 0)
+                    {
+                        closingIndex = searchQuery.Length;
+                    }
 
-        //            string subquery = searchQuery.Substring(i, closingIndex - i);
-        //            i = closingIndex;
-        //            firstIndex = i + 1;
-                    
-        //            if (value.Contains(subquery))
-        //            {
-        //                return SearchFilterResult.ExplicitInclusion;
-        //            }
-        //        }
+                    string subquery = searchQuery.Substring(i, closingIndex - i);
+                    i = closingIndex;
+                    firstIndex = i + 1;
 
-        //        if (c == ' ')
-        //        {
-        //            if (i == searchQuery.Length - 1)
-        //            {
-        //                break;
-        //            }
+                    if (value.Contains(subquery))
+                    {
+                        return SearchFilterResult.ExplicitInclusion;
+                    }
+                }
 
-        //            string subquery = searchQuery.Substring(firstIndex, i - firstIndex);
-        //            firstIndex = i + 1;
-                    
-        //            if (value.Contains(subquery))
-        //            {
-        //                return SearchFilterResult.ExplicitInclusion;
-        //            }
-        //        }
-        //    }
+                if (c == ' ')
+                {
+                    if (i == searchQuery.Length - 1)
+                    {
+                        break;
+                    }
 
-        //    if (firstIndex < searchQuery.Length && value.Contains(searchQuery.Substring(firstIndex)))
-        //    {
-        //        return  SearchFilterResult.ExplicitInclusion;
-        //    }
+                    string subquery = searchQuery.Substring(firstIndex, i - firstIndex);
+                    firstIndex = i + 1;
 
-        //    return SearchFilterResult.ImplicitExclusion;
-        //}
+                    if (value.Contains(subquery))
+                    {
+                        return SearchFilterResult.ExplicitInclusion;
+                    }
+                }
+            }
+
+            if (firstIndex < searchQuery.Length && value.Contains(searchQuery.Substring(firstIndex)))
+            {
+                return SearchFilterResult.ExplicitInclusion;
+            }
+
+            return SearchFilterResult.ImplicitExclusion;
+        }
     }
 }

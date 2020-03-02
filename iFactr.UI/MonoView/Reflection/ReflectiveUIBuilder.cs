@@ -164,13 +164,7 @@ namespace iFactr.UI.Reflection
                             var propertyInfo = info as PropertyInfo;
                             if (propertyInfo != null)
                             {
-                                if (propertyInfo.
-#if NETCF
-GetGetMethod()
-#else
-                                    GetMethod
-#endif
- == null)
+                                if (propertyInfo.GetMethod == null)
                                 {
                                     throw new MissingMemberException(string.Format("Missing getter for property {0}.  A getter is required for UI reflection.", propertyInfo.Name));
                                 }
@@ -528,13 +522,7 @@ GetGetMethod()
                     }
 
                     var info = cellInfo.Infos[0];
-                    if (info.
-#if NETCF
-GetGetMethod()
-#else
-                        GetMethod
-#endif
- == null)
+                    if (info.GetMethod == null)
                     {
                         throw new MissingMemberException(string.Format("Missing getter for property {0}.  A getter is required for UI reflection.", info.Name));
                     }
@@ -619,13 +607,7 @@ GetGetMethod()
                     }
 
                     var info = cellInfo.Infos[1];
-                    if (info.
-#if NETCF
-GetGetMethod()
-#else
-                        GetMethod
-#endif
- == null)
+                    if (info.GetMethod == null)
                     {
                         throw new MissingMemberException(string.Format("Missing getter for property {0}.  A getter is required for UI reflection.", info.Name));
                     }
@@ -709,13 +691,7 @@ GetGetMethod()
                     }
 
                     var info = cellInfo.Infos[i];
-                    if (info.
-#if NETCF
-GetGetMethod()
-#else
-                        GetMethod
-#endif
- == null)
+                    if (info.GetMethod == null)
                     {
                         throw new MissingMemberException(string.Format("Missing getter for property {0}.  A getter is required for UI reflection.", info.Name));
                     }
@@ -1076,13 +1052,7 @@ GetGetMethod()
                     image.FilePath = ExtractParameters(imageAttribute.FilePath, cellInfo.Object);
                 }
 
-                if (info.
-#if NETCF
-GetGetMethod()
-#else
-                    GetMethod
-#endif
- == null)
+                if (info.GetMethod == null)
                 {
                     throw new MissingMemberException(string.Format("Missing getter for property {0}.  A getter is required for UI reflection.", info.Name));
                 }
@@ -1618,13 +1588,7 @@ GetGetMethod()
             {
                 var infoType = Nullable.GetUnderlyingType(info.PropertyType) ?? info.PropertyType;
 
-                if (info.
-#if NETCF
-GetSetMethod()
-#else
-                    SetMethod
-#endif
- == null)
+                if (info.SetMethod == null)
                 {
                     return typeof(Label);
                 }

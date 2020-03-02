@@ -219,9 +219,7 @@ namespace iFactr.UI.Controls
             set { NativeControl.TextCompletion = value; }
         }
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private ITextBox NativeControl
         {
             get { return (ITextBox)Pair; }
@@ -260,4 +258,3 @@ namespace iFactr.UI.Controls
 		}
 	}
 }
-

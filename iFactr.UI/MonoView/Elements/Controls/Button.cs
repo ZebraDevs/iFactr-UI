@@ -107,9 +107,7 @@ namespace iFactr.UI.Controls
 			set { NativeControl.Title = value; }
 		}
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
         private IButton NativeControl
         {
             get { return (IButton)Pair; }
@@ -140,4 +138,3 @@ namespace iFactr.UI.Controls
 		}
 	}
 }
-

@@ -51,9 +51,7 @@ namespace iFactr.UI
 			set { NativeCell.Text = value; }
 		}
 
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-#endif
 		private IRichContentCell NativeCell
 		{
 			get { return (IRichContentCell)base.Pair; }
@@ -79,4 +77,3 @@ namespace iFactr.UI
 		}
 	}
 }
-

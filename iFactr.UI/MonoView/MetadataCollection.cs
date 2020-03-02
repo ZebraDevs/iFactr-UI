@@ -9,14 +9,10 @@ namespace iFactr.UI
     /// <summary>
     /// Represents a collection of key/value pairs for storing arbitrary data.
     /// </summary>
-#if !NETCF
     [DebuggerDisplay("Count = {Count}")]
-#endif
     public class MetadataCollection : IEnumerable<KeyValuePair<object, object>>, IEnumerable
     {
-#if !NETCF
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-#endif
         private Dictionary<object, object> data;
 
         /// <summary>
