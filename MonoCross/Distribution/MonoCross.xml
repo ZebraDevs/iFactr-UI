@@ -8938,11 +8938,6 @@
             An Apple iPad device.
             </summary>
         </member>
-        <member name="F:MonoCross.MobilePlatform.WindowsMobile">
-            <summary>
-            A Microsoft Windows Mobile device (v. 6.1 and earlier).
-            </summary>
-        </member>
         <member name="F:MonoCross.MobilePlatform.WebOS">
             <summary>
             A WebOS device like the Palm Pre or Pixi.
@@ -8956,16 +8951,6 @@
         <member name="F:MonoCross.MobilePlatform.WindowsIE">
             <summary>
             A Microsoft Internet Explorer browser.
-            </summary>
-        </member>
-        <member name="F:MonoCross.MobilePlatform.Silverlight">
-            <summary>
-            A Microsoft Silverlight browser.
-            </summary>
-        </member>
-        <member name="F:MonoCross.MobilePlatform.WinPhone">
-            <summary>
-            A Microsoft Windows Phone device.
             </summary>
         </member>
         <member name="T:MonoCross.NetworkResponse">
